@@ -1,1 +1,7 @@
-{"apkUrl":"https://github.com/xuongrong/russia-ai-support/releases/download/v2.9.0/russia-ai-support-v2.9.0.apk","mandatory":false,"releaseNotes":"Thêm hệ thống tự động cập nhật app","versionCode":11,"versionName":"2.9.0"}
+{
+  "versionCode": 13,
+  "versionName": "2.9.2",
+  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.9.2/russia-ai-support-v2.9.2.apk",
+  "releaseNotes": "Sửa lỗi không mở được app, loại bỏ code native gây crash",
+  "mandatory": false
+}
