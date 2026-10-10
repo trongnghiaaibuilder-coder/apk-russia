@@ -34,7 +34,7 @@ export interface UpdateCheckResult {
 
 // URL file version.json — đổi thành URL thật khi publish
 // Mặc định trỏ về GitHub releases của dự án
-const DEFAULT_UPDATE_URL = 'https://raw.githubusercontent.com/xuongrong/russia-ai-support/main/version.json';
+const DEFAULT_UPDATE_URL = 'https://raw.githubusercontent.com/trongnghiaaibuilder-coder/apk-russia/main/version.json';
 
 const UPDATE_URL_KEY = 'app_update_url';
 const LAST_CHECK_KEY = 'app_update_last_check';
