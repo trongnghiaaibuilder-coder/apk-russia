@@ -95,7 +95,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
               key={idx}
               onClick={() => setStep(idx)}
               className={`h-2.5 rounded-full transition-all cursor-pointer ${
-                idx === step ? 'w-8 v2-accent' : 'w-2.5 v2-divider'
+                idx === step ? 'w-8 v2-accent-bg' : 'w-2.5 v2-divider'
               }`}
               aria-label={`Bước ${idx + 1}`}
             />
@@ -120,7 +120,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
 
         <button
           onClick={() => (isLast ? onComplete() : setStep(step + 1))}
-          className="flex-1 flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl v2-accent text-white font-bold text-base cursor-pointer"
+          className="flex-1 flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl v2-accent-bg font-bold text-base cursor-pointer"
         >
           {isLast ? (
             <>
