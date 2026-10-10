@@ -1,0 +1,133 @@
+/**
+ * Groq AI Assistant Provider — miễn phí, tốc độ cao.
+ * Dùng API tương thích OpenAI: https://api.groq.com/openai/v1/chat/completions
+ * Lấy key miễn phí tại: https://console.groq.com
+ * Developer: Xương Rồng AI Developer
+ */
+
+import {
+  IAIAssistantProvider,
+  AssistantMessage,
+  AssistantResponse,
+  AssistantContext
+} from '../types';
+import { localKnowledgeProvider } from './localKnowledgeProvider';
+import { connectivityService } from '../../../services/connectivity';
+import { appSettings } from '../../../services/appSettings';
+import { logger } from '../../../services/logger';
+
+const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+const GROQ_MODEL = 'llama-3.3-70b-versatile';
+
+const SYSTEM_PROMPT = `Bạn là trợ lý AI thân thiện của ứng dụng "Nước Nga Trong Tầm Tay", giúp người Việt học tiếng Nga và sinh sống tại Nga.
+Trả lời bằng tiếng Việt, ngắn gọn, dễ hiểu. Khi đưa ra câu tiếng Nga, kèm phiên âm cho người Việt đọc theo.
+Ưu tiên thông tin thực tế: visa, đăng ký tạm trú, metro, mua sắm, y tế, số khẩn cấp 112.`;
+
+export class GroqAssistantProvider implements IAIAssistantProvider {
+  readonly providerId = 'groq-llama-3.3';
+  readonly providerName = 'Groq Llama 3.3 (Trực tuyến, miễn phí)';
+
+  private timeoutMs = 15000;
+
+  async sendMessage(
+    messages: AssistantMessage[],
+    context?: AssistantContext
+  ): Promise<AssistantResponse> {
+    const startTime = Date.now();
+
+    const lastUserMessage = [...messages].reverse().find(m => m.role === 'user');
+    if (!lastUserMessage || !lastUserMessage.content.trim()) {
+      return {
+        success: false,
+        durationMs: Date.now() - startTime,
+        errorCode: 'EMPTY_PROMPT',
+        error: 'Vui lòng nhập nội dung câu hỏi.'
+      };
+    }
+
+    if (lastUserMessage.content.length > 1500) {
+      return {
+        success: false,
+        durationMs: Date.now() - startTime,
+        errorCode: 'PROMPT_TOO_LONG',
+        error: 'Câu hỏi quá dài (giới hạn 1500 ký tự).'
+      };
+    }
+
+    const isOnline = connectivityService.getStatus();
+    if (!isOnline) {
+      const fallbackResp = await localKnowledgeProvider.sendMessage(messages, context);
+      return { ...fallbackResp, durationMs: Date.now() - startTime };
+    }
+
+    const apiKey = appSettings.getGroqApiKey();
+    if (!apiKey) {
+      // Không có key Groq → dùng tri thức offline
+      const fallbackResp = await localKnowledgeProvider.sendMessage(messages, context);
+      return { ...fallbackResp, durationMs: Date.now() - startTime };
+    }
+
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), this.timeoutMs);
+
+      // Chuyển đổi sang định dạng OpenAI chat
+      const chatMessages = [
+        { role: 'system', content: SYSTEM_PROMPT },
+        ...messages
+          .filter(m => m.role === 'user' || m.role === 'assistant')
+          .slice(-10)
+          .map(m => ({ role: m.role, content: m.content })),
+      ];
+
+      const response = await fetch(GROQ_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          model: GROQ_MODEL,
+          messages: chatMessages,
+          max_tokens: 1000,
+          temperature: 0.7,
+        }),
+        signal: controller.signal,
+      });
+      clearTimeout(timeout);
+
+      if (!response.ok) {
+        const errText = await response.text().catch(() => '');
+        logger.warn('GroqAssistantProvider', `API error ${response.status}: ${errText.slice(0, 200)}`);
+        // Key sai hoặc hết quota → fallback offline
+        const fallbackResp = await localKnowledgeProvider.sendMessage(messages, context);
+        return { ...fallbackResp, durationMs: Date.now() - startTime };
+      }
+
+      const data = await response.json();
+      const text = data?.choices?.[0]?.message?.content?.trim();
+
+      if (!text) {
+        const fallbackResp = await localKnowledgeProvider.sendMessage(messages, context);
+        return { ...fallbackResp, durationMs: Date.now() - startTime };
+      }
+
+      return {
+        success: true,
+        durationMs: Date.now() - startTime,
+        message: {
+          id: `msg_groq_${Date.now()}`,
+          role: 'assistant',
+          content: text,
+          timestamp: new Date().toISOString(),
+        } as AssistantMessage,
+      };
+    } catch (err: any) {
+      logger.warn('GroqAssistantProvider', 'Request failed, using offline fallback', err?.message);
+      const fallbackResp = await localKnowledgeProvider.sendMessage(messages, context);
+      return { ...fallbackResp, durationMs: Date.now() - startTime };
+    }
+  }
+}
+
+export const groqAssistantProvider = new GroqAssistantProvider();

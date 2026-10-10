@@ -11,6 +11,8 @@ import {
   AssistantContext 
 } from '../types';
 import { geminiAssistantProvider } from './geminiAssistantProvider';
+import { groqAssistantProvider } from './groqAssistantProvider';
+import { appSettings } from '../../../services/appSettings';
 import { safeStorage } from '../../../services/storage';
 import { logger } from '../../../services/logger';
 
@@ -18,6 +20,20 @@ const STORAGE_KEY_MESSAGES = 'russia_ai_assistant_history_v1';
 
 export class AssistantService {
   private provider: IAIAssistantProvider = geminiAssistantProvider;
+
+  /** Chọn provider: ưu tiên Groq (miễn phí, nhanh), sau đó Gemini, cuối cùng offline */
+  refreshProvider(): void {
+    if (appSettings.hasGroqApiKey()) {
+      this.provider = groqAssistantProvider;
+    } else {
+      this.provider = geminiAssistantProvider;
+    }
+  }
+
+  getProviderName(): string {
+    this.refreshProvider();
+    return this.provider.providerName;
+  }
   private messages: AssistantMessage[] = [];
 
   constructor() {
@@ -80,6 +96,7 @@ Hãy chọn một chủ đề gợi ý bên dưới hoặc đặt câu hỏi b�
   }
 
   async ask(prompt: string, context?: AssistantContext): Promise<AssistantResponse> {
+    this.refreshProvider();
     const trimmed = prompt.trim();
     if (!trimmed) {
       return {

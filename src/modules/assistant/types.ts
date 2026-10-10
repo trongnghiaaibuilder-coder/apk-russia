@@ -8,6 +8,7 @@ export type AssistantRole = 'user' | 'assistant' | 'system';
 
 export type AssistantProviderType = 
   | 'gemini-2.5-flash'
+  | 'groq-llama-3.3'
   | 'offline_local_knowledge'
   | 'mock_test_provider';
 

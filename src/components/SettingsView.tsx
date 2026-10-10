@@ -13,6 +13,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ isOnline }) => {
   const [apiKey, setApiKey] = useState(appSettings.getGeminiApiKey());
   const [showKey, setShowKey] = useState(false);
   const [keySaved, setKeySaved] = useState(false);
+  const [groqKey, setGroqKey] = useState(appSettings.getGroqApiKey());
+  const [showGroqKey, setShowGroqKey] = useState(false);
+  const [groqSaved, setGroqSaved] = useState(false);
   const [checkingUpdate, setCheckingUpdate] = useState(false);
   const [updateInfo, setUpdateInfo] = useState<UpdateInfo | null>(null);
   const [updateError, setUpdateError] = useState<string | null>(null);
@@ -23,6 +26,11 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ isOnline }) => {
     appSettings.setGeminiApiKey(apiKey);
     setKeySaved(true);
     window.setTimeout(() => setKeySaved(false), 2500);
+  };
+  const handleSaveGroqKey = () => {
+    appSettings.setGroqApiKey(groqKey);
+    setGroqSaved(true);
+    setTimeout(() => setGroqSaved(false), 3000);
   };
 
   const handleCheckUpdate = async () => {
@@ -113,6 +121,48 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ isOnline }) => {
         )}
         <p className="text-[11px] v2-text-faint mt-2 leading-relaxed">
           Lấy key miễn phí tại aistudio.google.com → Get API Key. Không có key, app vẫn dùng tri thức ngoại tuyến.
+        </p>
+      </div>
+
+      {/* Groq API Key — miễn phí, tốc độ cao */}
+      <div className="v2-card rounded-3xl p-4 v2-fade-up">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="w-10 h-10 rounded-2xl bg-orange-500/15 text-orange-300 flex items-center justify-center">
+            <KeyRound className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="text-[14px] font-bold v2-text">Groq AI <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 font-medium ml-1">Khuyên dùng</span></div>
+            <div className="text-[12px] v2-text-muted">Miễn phí, trả lời cực nhanh</div>
+          </div>
+        </div>
+        <div className="flex gap-2">
+          <div className="flex-1 relative">
+            <input
+              type={showGroqKey ? 'text' : 'password'}
+              value={groqKey}
+              onChange={(e) => setGroqKey(e.target.value)}
+              placeholder="Dán Groq API key (gsk_...) vào đây..."
+              className="w-full v2-input rounded-2xl px-4 py-2.5 text-[13px] outline-none"
+            />
+            <button
+              onClick={() => setShowGroqKey(!showGroqKey)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 v2-text-faint hover:opacity-70-muted cursor-pointer"
+            >
+              {showGroqKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+            </button>
+          </div>
+          <button
+            onClick={handleSaveGroqKey}
+            className="px-4 py-2.5 rounded-2xl bg-orange-600 v2-text text-[13px] font-bold active:scale-95 transition-transform cursor-pointer"
+          >
+            Lưu
+          </button>
+        </div>
+        {groqSaved && (
+          <p className="text-[12px] text-emerald-300 mt-2">Đã lưu! Trợ lý sẽ ưu tiên dùng Groq.</p>
+        )}
+        <p className="text-[11px] v2-text-faint mt-2 leading-relaxed">
+          Lấy key miễn phí tại console.groq.com → API Keys → Create. Không có key, app vẫn dùng tri thức ngoại tuyến.
         </p>
       </div>
 
