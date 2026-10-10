@@ -1,7 +1,7 @@
 {
-  "versionCode": 26,
-  "versionName": "2.15.0",
-  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.15.0/russia-ai-support-v2.15.0.apk",
-  "releaseNotes": "Icon mới (sao vàng, cờ Nga trên nền đỏ). Nút tải bản mới mở trực tiếp link APK.",
+  "versionCode": 27,
+  "versionName": "2.15.1",
+  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.15.1/russia-ai-support-v2.15.1.apk",
+  "releaseNotes": "Icon viền vàng dày rõ hơn",
   "mandatory": false
 }
