@@ -1,7 +1,7 @@
 {
-  "versionCode": 19,
-  "versionName": "2.13.0",
-  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.13.0/russia-ai-support-v2.13.0.apk",
-  "releaseNotes": "Thêm Bản đồ & Chỉ đường (Yandex Maps), Đổi tiền VND-RUB, Câu yêu thích",
+  "versionCode": 20,
+  "versionName": "2.13.1",
+  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.13.1/russia-ai-support-v2.13.1.apk",
+  "releaseNotes": "Sửa lỗi tự động tải trên Android 13+",
   "mandatory": false
 }
