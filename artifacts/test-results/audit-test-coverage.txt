@@ -1,0 +1,1740 @@
+
+> russia-ai-support@1.0.0 test:all
+> tsx --test tests/*.test.ts
+
+TAP version 13
+# Subtest: Data Quality Spot Check: 10 Alphabet Entries
+    # Subtest: Inspect first 10 Cyrillic alphabet entries
+    ok 1 - Inspect first 10 Cyrillic alphabet entries
+      ---
+      duration_ms: 1.645816
+      type: 'test'
+      ...
+    1..1
+ok 1 - Data Quality Spot Check: 10 Alphabet Entries
+  ---
+  duration_ms: 3.182767
+  type: 'suite'
+  ...
+# Subtest: Data Quality Spot Check: 20 Vocabulary Entries
+    # Subtest: Inspect 20 random/distributed vocabulary entries across categories
+    ok 1 - Inspect 20 random/distributed vocabulary entries across categories
+      ---
+      duration_ms: 0.499239
+      type: 'test'
+      ...
+    1..1
+ok 2 - Data Quality Spot Check: 20 Vocabulary Entries
+  ---
+  duration_ms: 0.654526
+  type: 'suite'
+  ...
+# Subtest: Data Quality Spot Check: 15 Phrases
+    # Subtest: Inspect 15 phrases across different situations
+    ok 1 - Inspect 15 phrases across different situations
+      ---
+      duration_ms: 0.310036
+      type: 'test'
+      ...
+    1..1
+ok 3 - Data Quality Spot Check: 15 Phrases
+  ---
+  duration_ms: 0.436228
+  type: 'suite'
+  ...
+# Subtest: Data Quality Spot Check: 5 Lessons
+    # Subtest: Inspect 5 lessons for comprehensive structure
+    ok 1 - Inspect 5 lessons for comprehensive structure
+      ---
+      duration_ms: 0.34629
+      type: 'test'
+      ...
+    1..1
+ok 4 - Data Quality Spot Check: 5 Lessons
+  ---
+  duration_ms: 0.48784
+  type: 'suite'
+  ...
+# [RussiaAI][TestRunner] Running automated P1 test suite 
+# [RussiaAI][TestRunner] ⚠️ Sample warning verification 
+# [RussiaAI][TestRunner] ❌ Sample error verification Error: Test err
+#     at TestContext.<anonymous> (/app/applet/tests/p1-foundation.test.ts:90:61)
+#     at Test.runInAsyncScope (node:async_hooks:214:14)
+#     at Test.run (node:internal/test_runner/test:1047:25)
+#     at Test.start (node:internal/test_runner/test:944:17)
+#     at node:internal/test_runner/test:1440:71
+#     at node:internal/per_context/primordials:466:82
+#     at new Promise (<anonymous>)
+#     at new SafePromise (node:internal/per_context/primordials:435:3)
+#     at node:internal/per_context/primordials:466:9
+#     at Array.map (<anonymous>)
+# Subtest: P1 Acceptance Test: 1. Application Configuration & Security
+    # Subtest: App configuration matches project specifications
+    ok 1 - App configuration matches project specifications
+      ---
+      duration_ms: 1.289448
+      type: 'test'
+      ...
+    # Subtest: No API keys or secrets are leaked into client runtime config
+    ok 2 - No API keys or secrets are leaked into client runtime config
+      ---
+      duration_ms: 0.22257
+      type: 'test'
+      ...
+    1..2
+ok 5 - P1 Acceptance Test: 1. Application Configuration & Security
+  ---
+  duration_ms: 3.182957
+  type: 'suite'
+  ...
+# Subtest: P1 Acceptance Test: 2. Main Navigation & Route Coverage
+    # Subtest: All primary navigation destinations are defined
+    ok 1 - All primary navigation destinations are defined
+      ---
+      duration_ms: 0.26758
+      type: 'test'
+      ...
+    1..1
+ok 6 - P1 Acceptance Test: 2. Main Navigation & Route Coverage
+  ---
+  duration_ms: 0.451552
+  type: 'suite'
+  ...
+# Subtest: P1 Acceptance Test: 3. Offline Usability & Connectivity (Rule 13)
+    # Subtest: Connectivity service reports status and supports subscription
+    ok 1 - Connectivity service reports status and supports subscription
+      ---
+      duration_ms: 0.353629
+      type: 'test'
+      ...
+    # Subtest: Connectivity service supports simulation of offline transitions
+    ok 2 - Connectivity service supports simulation of offline transitions
+      ---
+      duration_ms: 0.301695
+      type: 'test'
+      ...
+    1..2
+ok 7 - P1 Acceptance Test: 3. Offline Usability & Connectivity (Rule 13)
+  ---
+  duration_ms: 0.890219
+  type: 'suite'
+  ...
+# Subtest: P1 Acceptance Test: 4. Safe Storage with Memory Fallback
+    # Subtest: Storage service writes and reads data safely without throwing
+    ok 1 - Storage service writes and reads data safely without throwing
+      ---
+      duration_ms: 2.685554
+      type: 'test'
+      ...
+    1..1
+ok 8 - P1 Acceptance Test: 4. Safe Storage with Memory Fallback
+  ---
+  duration_ms: 2.900721
+  type: 'suite'
+  ...
+# Subtest: P1 Acceptance Test: 5. Structured Error Logging
+    # Subtest: Logger records entries without swallowing errors silently
+    ok 1 - Logger records entries without swallowing errors silently
+      ---
+      duration_ms: 2.955286
+      type: 'test'
+      ...
+    1..1
+ok 9 - P1 Acceptance Test: 5. Structured Error Logging
+  ---
+  duration_ms: 3.228278
+  type: 'suite'
+  ...
+# Subtest: P1 Acceptance Test: 6. Design System Mobile Constraints
+    # Subtest: Verified mobile hitbox math and container layout rules
+    ok 1 - Verified mobile hitbox math and container layout rules
+      ---
+      duration_ms: 0.180561
+      type: 'test'
+      ...
+    1..1
+ok 10 - P1 Acceptance Test: 6. Design System Mobile Constraints
+  ---
+  duration_ms: 0.302146
+  type: 'suite'
+  ...
+# [RussiaAI][TextToSpeechService] ⚠️ Trình duyệt hiện tại chưa hỗ trợ Text-to-Speech (speechSynthesis). 
+# Subtest: P10 Critical Flow 1: Learning → Quiz → Progress
+    # Subtest: User studies Cyrillic and lesson, takes quiz, and updates progress tracking
+    ok 1 - User studies Cyrillic and lesson, takes quiz, and updates progress tracking
+      ---
+      duration_ms: 2.84844
+      type: 'test'
+      ...
+    1..1
+ok 11 - P10 Critical Flow 1: Learning → Quiz → Progress
+  ---
+  duration_ms: 4.726209
+  type: 'suite'
+  ...
+# Subtest: P10 Critical Flow 2: Camera → OCR → Translation
+    # Subtest: User captures Russian signage, OCR extracts Cyrillic text, and translation decodes it
+    ok 1 - User captures Russian signage, OCR extracts Cyrillic text, and translation decodes it
+      ---
+      duration_ms: 2.855106
+      type: 'test'
+      ...
+    1..1
+ok 12 - P10 Critical Flow 2: Camera → OCR → Translation
+  ---
+  duration_ms: 3.105284
+  type: 'suite'
+  ...
+# Subtest: P10 Critical Flow 3: Voice → STT → Translation → TTS
+    # Subtest: Voice transcript feeds into translation engine and triggers text-to-speech
+    ok 1 - Voice transcript feeds into translation engine and triggers text-to-speech
+      ---
+      duration_ms: 2.149904
+      type: 'test'
+      ...
+    1..1
+ok 13 - P10 Critical Flow 3: Voice → STT → Translation → TTS
+  ---
+  duration_ms: 2.354869
+  type: 'suite'
+  ...
+# Subtest: P10 Critical Flow 4: Translation → History → Restore
+    # Subtest: Translation adds to history, survives retrieval, and restores correctly
+    ok 1 - Translation adds to history, survives retrieval, and restores correctly
+      ---
+      duration_ms: 0.886232
+      type: 'test'
+      ...
+    1..1
+ok 14 - P10 Critical Flow 4: Translation → History → Restore
+  ---
+  duration_ms: 1.076066
+  type: 'suite'
+  ...
+# Subtest: P10 Critical Flow 5: Assistant → AI Provider → Response
+    # Subtest: Assistant accepts legal query, queries provider, and maintains conversation chain
+    ok 1 - Assistant accepts legal query, queries provider, and maintains conversation chain
+      ---
+      duration_ms: 1.208916
+      type: 'test'
+      ...
+    1..1
+ok 15 - P10 Critical Flow 5: Assistant → AI Provider → Response
+  ---
+  duration_ms: 1.395752
+  type: 'suite'
+  ...
+# Subtest: P10 Critical Flow 6: Offline → Fallback → Recovery
+    # Subtest: Network drops, offline fallbacks activate, network recovers without error
+    ok 1 - Network drops, offline fallbacks activate, network recovers without error
+      ---
+      duration_ms: 0.793748
+      type: 'test'
+      ...
+    1..1
+ok 16 - P10 Critical Flow 6: Offline → Fallback → Recovery
+  ---
+  duration_ms: 0.976077
+  type: 'suite'
+  ...
+# Subtest: P12 Acceptance Criteria: Android Project & Build Configuration
+    # Subtest: P12-1: Android project structure and Gradle configurations exist
+    ok 1 - P12-1: Android project structure and Gradle configurations exist
+      ---
+      duration_ms: 1.724912
+      type: 'test'
+      ...
+    # Subtest: P12-2: App build.gradle contains correct version and SDK specifications
+    ok 2 - P12-2: App build.gradle contains correct version and SDK specifications
+      ---
+      duration_ms: 0.677438
+      type: 'test'
+      ...
+    # Subtest: P12-3: AndroidManifest.xml declares all required hardware & network permissions
+    ok 3 - P12-3: AndroidManifest.xml declares all required hardware & network permissions
+      ---
+      duration_ms: 0.509031
+      type: 'test'
+      ...
+    # Subtest: P12-4: Native WebView activity handles hardware permissions and loads local offline bundle
+    ok 4 - P12-4: Native WebView activity handles hardware permissions and loads local offline bundle
+      ---
+      duration_ms: 0.315718
+      type: 'test'
+      ...
+    # Subtest: P12-5: Offline web assets are packaged in Android assets directory
+    ok 5 - P12-5: Offline web assets are packaged in Android assets directory
+      ---
+      duration_ms: 0.440492
+      type: 'test'
+      ...
+    # Subtest: P12-6: Production APK artifact is generated and satisfies integrity requirements
+    ok 6 - P12-6: Production APK artifact is generated and satisfies integrity requirements
+      ---
+      duration_ms: 1.158367
+      type: 'test'
+      ...
+    1..6
+ok 17 - P12 Acceptance Criteria: Android Project & Build Configuration
+  ---
+  duration_ms: 6.990583
+  type: 'suite'
+  ...
+# Subtest: P13 Android Runtime Verification & Contract Tests
+    # Subtest: P13-1: WebView entry point HTML parses correctly and contains critical root mount points
+    ok 1 - P13-1: WebView entry point HTML parses correctly and contains critical root mount points
+      ---
+      duration_ms: 1.77952
+      type: 'test'
+      ...
+    # Subtest: P13-2: Android native activity implements hardware permission bridge for WebView
+    ok 2 - P13-2: Android native activity implements hardware permission bridge for WebView
+      ---
+      duration_ms: 0.328766
+      type: 'test'
+      ...
+    # Subtest: P13-3: Android native activity implements back navigation handling
+    ok 3 - P13-3: Android native activity implements back navigation handling
+      ---
+      duration_ms: 0.410707
+      type: 'test'
+      ...
+    # Subtest: P13-4: Service Worker and offline PWA manifest are packaged inside Android assets
+    ok 4 - P13-4: Service Worker and offline PWA manifest are packaged inside Android assets
+      ---
+      duration_ms: 0.388997
+      type: 'test'
+      ...
+    # Subtest: P13-5: Physical Android device check records environment constraint
+    ok 5 - P13-5: Physical Android device check records environment constraint
+      ---
+      duration_ms: 0.261935
+      type: 'test'
+      ...
+    1..5
+ok 18 - P13 Android Runtime Verification & Contract Tests
+  ---
+  duration_ms: 4.987145
+  type: 'suite'
+  ...
+# Subtest: P2 Dictionary Foundation: 1. Schema Validation & Data Integrity
+    # Subtest: DICTIONARY_DATASET contains at least 300 comprehensive Vietnamese-Russian entries
+    ok 1 - DICTIONARY_DATASET contains at least 300 comprehensive Vietnamese-Russian entries
+      ---
+      duration_ms: 1.798859
+      type: 'test'
+      ...
+    # Subtest: dictionaryService.browse returns entries when query is empty with topic and POS filters
+    ok 2 - dictionaryService.browse returns entries when query is empty with topic and POS filters
+      ---
+      duration_ms: 4.219496
+      type: 'test'
+      ...
+    # Subtest: All entries pass strict schema validation with zero errors
+    ok 3 - All entries pass strict schema validation with zero errors
+      ---
+      duration_ms: 1.428353
+      type: 'test'
+      ...
+    # Subtest: Every entry has Russian Cyrillic lemma and valid part of speech
+    ok 4 - Every entry has Russian Cyrillic lemma and valid part of speech
+      ---
+      duration_ms: 1.218736
+      type: 'test'
+      ...
+    # Subtest: Every entry contains accurate Vietnamese meanings
+    ok 5 - Every entry contains accurate Vietnamese meanings
+      ---
+      duration_ms: 1.11939
+      type: 'test'
+      ...
+    1..5
+ok 19 - P2 Dictionary Foundation: 1. Schema Validation & Data Integrity
+  ---
+  duration_ms: 11.987211
+  type: 'suite'
+  ...
+# Subtest: P2 Dictionary Foundation: 2. Source Attribution & 100% Offline Compliance
+    # Subtest: All sources defined in manifest are 100% offline compliant
+    ok 1 - All sources defined in manifest are 100% offline compliant
+      ---
+      duration_ms: 0.386052
+      type: 'test'
+      ...
+    # Subtest: Every dictionary entry sourceRef points to an authorized manifest source
+    ok 2 - Every dictionary entry sourceRef points to an authorized manifest source
+      ---
+      duration_ms: 1.269515
+      type: 'test'
+      ...
+    # Subtest: Attribution summary provides complete transparency without external network call
+    ok 3 - Attribution summary provides complete transparency without external network call
+      ---
+      duration_ms: 0.322338
+      type: 'test'
+      ...
+    1..3
+ok 20 - P2 Dictionary Foundation: 2. Source Attribution & 100% Offline Compliance
+  ---
+  duration_ms: 2.318159
+  type: 'suite'
+  ...
+# Subtest: P2 Dictionary Foundation: 3. Normalization & Cyrillic/Vietnamese Support
+    # Subtest: normalizeRussian strips accents, normalizes ё -> е, and handles case
+    ok 1 - normalizeRussian strips accents, normalizes ё -> е, and handles case
+      ---
+      duration_ms: 0.349738
+      type: 'test'
+      ...
+    # Subtest: normalizeVietnamese and removeVietnameseDiacritics handle tone marks
+    ok 2 - normalizeVietnamese and removeVietnameseDiacritics handle tone marks
+      ---
+      duration_ms: 0.548601
+      type: 'test'
+      ...
+    # Subtest: isCyrillic accurately differentiates Russian from Vietnamese/English text
+    ok 3 - isCyrillic accurately differentiates Russian from Vietnamese/English text
+      ---
+      duration_ms: 0.309223
+      type: 'test'
+      ...
+    1..3
+ok 21 - P2 Dictionary Foundation: 3. Normalization & Cyrillic/Vietnamese Support
+  ---
+  duration_ms: 1.495078
+  type: 'suite'
+  ...
+# Subtest: P2 Dictionary Foundation: 4. Morphology Index & Word Inflection Analysis
+    # Subtest: Morphology analysis recognizes base lemma from inflected noun cases
+    ok 1 - Morphology analysis recognizes base lemma from inflected noun cases
+      ---
+      duration_ms: 0.853683
+      type: 'test'
+      ...
+    # Subtest: Morphology analysis recognizes inflected verb conjugation forms
+    ok 2 - Morphology analysis recognizes inflected verb conjugation forms
+      ---
+      duration_ms: 0.40902
+      type: 'test'
+      ...
+    # Subtest: Common aspectual pairs resolve correctly for imperfective and perfective verbs
+    ok 3 - Common aspectual pairs resolve correctly for imperfective and perfective verbs
+      ---
+      duration_ms: 0.232425
+      type: 'test'
+      ...
+    # Subtest: All 6 Russian grammatical cases are documented with questions and Vietnamese descriptions
+    ok 4 - All 6 Russian grammatical cases are documented with questions and Vietnamese descriptions
+      ---
+      duration_ms: 2.214711
+      type: 'test'
+      ...
+    # Subtest: Verb conjugation patterns (1st, 2nd, irregular) are properly structured
+    ok 5 - Verb conjugation patterns (1st, 2nd, irregular) are properly structured
+      ---
+      duration_ms: 0.231175
+      type: 'test'
+      ...
+    1..5
+ok 22 - P2 Dictionary Foundation: 4. Morphology Index & Word Inflection Analysis
+  ---
+  duration_ms: 4.370352
+  type: 'suite'
+  ...
+# Subtest: P2 Dictionary Foundation: 5. Search Engine & Multi-Stage Scoring
+    # Subtest: Exact Russian lemma search returns score 100 as top match
+    ok 1 - Exact Russian lemma search returns score 100 as top match
+      ---
+      duration_ms: 5.861547
+      type: 'test'
+      ...
+    # Subtest: Inflected form search finds base entry with score 90
+    ok 2 - Inflected form search finds base entry with score 90
+      ---
+      duration_ms: 0.690943
+      type: 'test'
+      ...
+    # Subtest: Vietnamese meaning search finds Russian word accurately
+    ok 3 - Vietnamese meaning search finds Russian word accurately
+      ---
+      duration_ms: 5.949639
+      type: 'test'
+      ...
+    # Subtest: Accent-free Vietnamese search works seamlessly
+    ok 4 - Accent-free Vietnamese search works seamlessly
+      ---
+      duration_ms: 18.461484
+      type: 'test'
+      ...
+    # Subtest: Topic filtering limits results to requested category
+    ok 5 - Topic filtering limits results to requested category
+      ---
+      duration_ms: 0.721544
+      type: 'test'
+      ...
+    # Subtest: Part of speech filtering isolates nouns, verbs, and adjectives
+    ok 6 - Part of speech filtering isolates nouns, verbs, and adjectives
+      ---
+      duration_ms: 0.330081
+      type: 'test'
+      ...
+    # Subtest: Lookup benchmark executes in < 30ms offline
+    ok 7 - Lookup benchmark executes in < 30ms offline
+      ---
+      duration_ms: 282.741543
+      type: 'test'
+      ...
+    1..7
+ok 23 - P2 Dictionary Foundation: 5. Search Engine & Multi-Stage Scoring
+  ---
+  duration_ms: 315.361014
+  type: 'suite'
+  ...
+# Subtest: P2 Dictionary Foundation: 6. Practical Phrases & Example Sentences
+    # Subtest: PRACTICAL_PHRASES contains essential survival & travel phrases
+    ok 1 - PRACTICAL_PHRASES contains essential survival & travel phrases
+      ---
+      duration_ms: 0.440352
+      type: 'test'
+      ...
+    # Subtest: PRACTICAL_EXAMPLES contains grounded bilingual examples with grammar tags
+    ok 2 - PRACTICAL_EXAMPLES contains grounded bilingual examples with grammar tags
+      ---
+      duration_ms: 0.269239
+      type: 'test'
+      ...
+    1..2
+ok 24 - P2 Dictionary Foundation: 6. Practical Phrases & Example Sentences
+  ---
+  duration_ms: 1.354157
+  type: 'suite'
+  ...
+# Subtest: P2 Dictionary Foundation: 7. Integration Bridges for P3, P4 & P6
+    # Subtest: P3 Translation Bridge enriches token stream with base lemmas & definitions
+    ok 1 - P3 Translation Bridge enriches token stream with base lemmas & definitions
+      ---
+      duration_ms: 0.712832
+      type: 'test'
+      ...
+    # Subtest: P4 Voice Bridge resolves inflected spoken words to lemmas on demand
+    ok 2 - P4 Voice Bridge resolves inflected spoken words to lemmas on demand
+      ---
+      duration_ms: 0.732298
+      type: 'test'
+      ...
+    # Subtest: P6 Assistant Bridge retrieves keywords for living domains
+    ok 3 - P6 Assistant Bridge retrieves keywords for living domains
+      ---
+      duration_ms: 0.279362
+      type: 'test'
+      ...
+    # Subtest: Statistics summary reflects wide data metrics and full offline status
+    ok 4 - Statistics summary reflects wide data metrics and full offline status
+      ---
+      duration_ms: 0.57235
+      type: 'test'
+      ...
+    1..4
+ok 25 - P2 Dictionary Foundation: 7. Integration Bridges for P3, P4 & P6
+  ---
+  duration_ms: 2.617829
+  type: 'suite'
+  ...
+# Subtest: P2 Acceptance: A. Russian Alphabet Dataset
+    # Subtest: Exactly 33 Russian Cyrillic letters are present
+    ok 1 - Exactly 33 Russian Cyrillic letters are present
+      ---
+      duration_ms: 1.306222
+      type: 'test'
+      ...
+    # Subtest: All standard Cyrillic letters exist in proper uppercase sequence
+    ok 2 - All standard Cyrillic letters exist in proper uppercase sequence
+      ---
+      duration_ms: 0.282237
+      type: 'test'
+      ...
+    # Subtest: Every letter contains all required structured fields
+    ok 3 - Every letter contains all required structured fields
+      ---
+      duration_ms: 0.528586
+      type: 'test'
+      ...
+    1..3
+ok 26 - P2 Acceptance: A. Russian Alphabet Dataset
+  ---
+  duration_ms: 3.80303
+  type: 'suite'
+  ...
+# Subtest: P2 Acceptance: B. Russian Vocabulary Dataset
+    # Subtest: Dataset contains at least 300 comprehensive vocabulary entries across 23 categories
+    ok 1 - Dataset contains at least 300 comprehensive vocabulary entries across 23 categories
+      ---
+      duration_ms: 0.253645
+      type: 'test'
+      ...
+    # Subtest: Every vocabulary item contains required structured fields
+    ok 2 - Every vocabulary item contains required structured fields
+      ---
+      duration_ms: 0.90909
+      type: 'test'
+      ...
+    # Subtest: All 23 core and extended categories are represented in vocabulary dataset
+    ok 3 - All 23 core and extended categories are represented in vocabulary dataset
+      ---
+      duration_ms: 0.305802
+      type: 'test'
+      ...
+    1..3
+ok 27 - P2 Acceptance: B. Russian Vocabulary Dataset
+  ---
+  duration_ms: 1.714167
+  type: 'suite'
+  ...
+# Subtest: P2 Acceptance: C. Russian Survival Phrases Dataset
+    # Subtest: Dataset contains at least 50 practical phrases
+    ok 1 - Dataset contains at least 50 practical phrases
+      ---
+      duration_ms: 0.216679
+      type: 'test'
+      ...
+    # Subtest: Every phrase contains required structured fields
+    ok 2 - Every phrase contains required structured fields
+      ---
+      duration_ms: 0.480558
+      type: 'test'
+      ...
+    # Subtest: Critical emergency phrases are flagged appropriately
+    ok 3 - Critical emergency phrases are flagged appropriately
+      ---
+      duration_ms: 0.241393
+      type: 'test'
+      ...
+    1..3
+ok 28 - P2 Acceptance: C. Russian Survival Phrases Dataset
+  ---
+  duration_ms: 1.243462
+  type: 'suite'
+  ...
+# Subtest: P2 Acceptance: D. Topic Lessons Dataset
+    # Subtest: All 16 required initial topics exist in order
+    ok 1 - All 16 required initial topics exist in order
+      ---
+      duration_ms: 0.377425
+      type: 'test'
+      ...
+    1..1
+ok 29 - P2 Acceptance: D. Topic Lessons Dataset
+  ---
+  duration_ms: 0.566062
+  type: 'suite'
+  ...
+# Subtest: P2 Acceptance: E. Flashcard Logic & Persistence
+    # Subtest: Marking known and review persists to real storage state
+    ok 1 - Marking known and review persists to real storage state
+      ---
+      duration_ms: 0.80063
+      type: 'test'
+      ...
+    1..1
+ok 30 - P2 Acceptance: E. Flashcard Logic & Persistence
+  ---
+  duration_ms: 0.982652
+  type: 'suite'
+  ...
+# Subtest: P2 Acceptance: F. Review Queue Logic
+    # Subtest: Review queue reflects items marked Need Review and removes on Known
+    ok 1 - Review queue reflects items marked Need Review and removes on Known
+      ---
+      duration_ms: 0.702494
+      type: 'test'
+      ...
+    1..1
+ok 31 - P2 Acceptance: F. Review Queue Logic
+  ---
+  duration_ms: 0.89237
+  type: 'suite'
+  ...
+# Subtest: P2 Acceptance: G. Deterministic Quiz Engine
+    # Subtest: Quiz generates questions and validates deterministic answers
+    ok 1 - Quiz generates questions and validates deterministic answers
+      ---
+      duration_ms: 0.684025
+      type: 'test'
+      ...
+    1..1
+ok 32 - P2 Acceptance: G. Deterministic Quiz Engine
+  ---
+  duration_ms: 0.879678
+  type: 'suite'
+  ...
+# Subtest: P2 Acceptance: H. Progress Model Derivation
+    # Subtest: Progress derives from actual stored actions without fabrication
+    ok 1 - Progress derives from actual stored actions without fabrication
+      ---
+      duration_ms: 3.28166
+      type: 'test'
+      ...
+    1..1
+ok 33 - P2 Acceptance: H. Progress Model Derivation
+  ---
+  duration_ms: 4.773901
+  type: 'suite'
+  ...
+# Subtest: P2 Acceptance: I. Search and Filter Logic
+    # Subtest: Local search resolves by Russian word, Vietnamese, and category
+    ok 1 - Local search resolves by Russian word, Vietnamese, and category
+      ---
+      duration_ms: 0.8315
+      type: 'test'
+      ...
+    1..1
+ok 34 - P2 Acceptance: I. Search and Filter Logic
+  ---
+  duration_ms: 1.219069
+  type: 'suite'
+  ...
+# Subtest: P2 Acceptance: J. Offline Usability
+    # Subtest: All learning datasets and logic operate purely locally without network
+    ok 1 - All learning datasets and logic operate purely locally without network
+      ---
+      duration_ms: 0.265868
+      type: 'test'
+      ...
+    1..1
+ok 35 - P2 Acceptance: J. Offline Usability
+  ---
+  duration_ms: 0.445481
+  type: 'suite'
+  ...
+# Subtest: P3 Acceptance: A. Language Direction
+    # Subtest: Supports Vietnamese → Russian direction
+    ok 1 - Supports Vietnamese → Russian direction
+      ---
+      duration_ms: 3.186394
+      type: 'test'
+      ...
+    # Subtest: Supports Russian → Vietnamese direction
+    ok 2 - Supports Russian → Vietnamese direction
+      ---
+      duration_ms: 0.534988
+      type: 'test'
+      ...
+    1..2
+ok 36 - P3 Acceptance: A. Language Direction
+  ---
+  duration_ms: 5.704368
+  type: 'suite'
+  ...
+# Subtest: P3 Acceptance: B. Input Validation
+    # Subtest: Rejects empty input with clear error message
+    ok 1 - Rejects empty input with clear error message
+      ---
+      duration_ms: 0.714567
+      type: 'test'
+      ...
+    # Subtest: Rejects whitespace-only input
+    ok 2 - Rejects whitespace-only input
+      ---
+      duration_ms: 0.376384
+      type: 'test'
+      ...
+    # Subtest: Rejects text exceeding character limit (> 500 chars)
+    ok 3 - Rejects text exceeding character limit (> 500 chars)
+      ---
+      duration_ms: 0.364297
+      type: 'test'
+      ...
+    # Subtest: Rejects identical source and target languages
+    ok 4 - Rejects identical source and target languages
+      ---
+      duration_ms: 0.348511
+      type: 'test'
+      ...
+    1..4
+ok 37 - P3 Acceptance: B. Input Validation
+  ---
+  duration_ms: 2.231806
+  type: 'suite'
+  ...
+# Subtest: P3 Acceptance: C. Provider Contract & Configuration
+    # Subtest: Provider configuration provides explicit status without secret exposure
+    ok 1 - Provider configuration provides explicit status without secret exposure
+      ---
+      duration_ms: 0.436686
+      type: 'test'
+      ...
+    1..1
+ok 38 - P3 Acceptance: C. Provider Contract & Configuration
+  ---
+  duration_ms: 0.618794
+  type: 'suite'
+  ...
+# Subtest: P3 Acceptance: D. Local Fallback & Strict No-Fake-AI Guarantee
+    # Subtest: Local fallback translates known demo phrases accurately
+    ok 1 - Local fallback translates known demo phrases accurately
+      ---
+      duration_ms: 0.521552
+      type: 'test'
+      ...
+    # Subtest: Unknown arbitrary text is NOT falsely claimed as translated when no provider is configured
+    ok 2 - Unknown arbitrary text is NOT falsely claimed as translated when no provider is configured
+      ---
+      duration_ms: 125.151922
+      type: 'test'
+      ...
+    1..2
+ok 39 - P3 Acceptance: D. Local Fallback & Strict No-Fake-AI Guarantee
+  ---
+  duration_ms: 125.949535
+  type: 'suite'
+  ...
+# Subtest: P3 Acceptance: E. Translation History Lifecycle
+    # Subtest: Saves, retrieves, restores, and clears history items via storage
+    ok 1 - Saves, retrieves, restores, and clears history items via storage
+      ---
+      duration_ms: 0.916099
+      type: 'test'
+      ...
+    1..1
+ok 40 - P3 Acceptance: E. Translation History Lifecycle
+  ---
+  duration_ms: 1.126249
+  type: 'suite'
+  ...
+# Subtest: P3 Acceptance: F. Language Swap Logic
+    # Subtest: Exchanging source and target maintains valid bidirectional states
+    ok 1 - Exchanging source and target maintains valid bidirectional states
+      ---
+      duration_ms: 0.255167
+      type: 'test'
+      ...
+    1..1
+ok 41 - P3 Acceptance: F. Language Swap Logic
+  ---
+  duration_ms: 0.441364
+  type: 'suite'
+  ...
+# Subtest: P3 Acceptance: G. Result Structure & Quality Contract
+    # Subtest: Translation result contains required fields without fabricated confidence scores
+    ok 1 - Translation result contains required fields without fabricated confidence scores
+      ---
+      duration_ms: 0.468106
+      type: 'test'
+      ...
+    1..1
+ok 42 - P3 Acceptance: G. Result Structure & Quality Contract
+  ---
+  duration_ms: 0.629061
+  type: 'suite'
+  ...
+# Subtest: P3 Acceptance: H. Offline Behavior & Fallbacks
+    # Subtest: History remains accessible and local fallback works offline
+    ok 1 - History remains accessible and local fallback works offline
+      ---
+      duration_ms: 0.275271
+      type: 'test'
+      ...
+    1..1
+ok 43 - P3 Acceptance: H. Offline Behavior & Fallbacks
+  ---
+  duration_ms: 0.444443
+  type: 'suite'
+  ...
+# [RussiaAI][TextToSpeechService] ⚠️ Trình duyệt hiện tại chưa hỗ trợ Text-to-Speech (speechSynthesis). 
+# [RussiaAI][TextToSpeechService] ⚠️ Trình duyệt hiện tại chưa hỗ trợ Text-to-Speech (speechSynthesis). 
+# [RussiaAI][TextToSpeechService] ⚠️ Trình duyệt hiện tại chưa hỗ trợ Text-to-Speech (speechSynthesis). 
+# [RussiaAI][TextToSpeechService] ⚠️ Trình duyệt hiện tại chưa hỗ trợ Text-to-Speech (speechSynthesis). 
+# Subtest: P4 Unit Test 1: Speech Recognition Abstraction
+    # Subtest: Service exposes standard methods
+    ok 1 - Service exposes standard methods
+      ---
+      duration_ms: 1.462107
+      type: 'test'
+      ...
+    # Subtest: Initial state is not listening and empty transcript
+    ok 2 - Initial state is not listening and empty transcript
+      ---
+      duration_ms: 0.302203
+      type: 'test'
+      ...
+    # Subtest: In Node environment, isSupported returns false gracefully without throwing
+    ok 3 - In Node environment, isSupported returns false gracefully without throwing
+      ---
+      duration_ms: 0.216188
+      type: 'test'
+      ...
+    # Subtest: Calling startListening when unsupported triggers onError with not-supported code
+    ok 4 - Calling startListening when unsupported triggers onError with not-supported code
+      ---
+      duration_ms: 1.019368
+      type: 'test'
+      ...
+    1..4
+ok 44 - P4 Unit Test 1: Speech Recognition Abstraction
+  ---
+  duration_ms: 5.060459
+  type: 'suite'
+  ...
+# Subtest: P4 Unit Test 2: Text-to-Speech Abstraction
+    # Subtest: Service exposes standard methods
+    ok 1 - Service exposes standard methods
+      ---
+      duration_ms: 0.356442
+      type: 'test'
+      ...
+    # Subtest: Language resolution maps correctly for vi and ru
+    ok 2 - Language resolution maps correctly for vi and ru
+      ---
+      duration_ms: 0.22971
+      type: 'test'
+      ...
+    # Subtest: Empty text is rejected and returns false
+    ok 3 - Empty text is rejected and returns false
+      ---
+      duration_ms: 0.428165
+      type: 'test'
+      ...
+    # Subtest: In Node environment, isSupported returns false gracefully without crash
+    ok 4 - In Node environment, isSupported returns false gracefully without crash
+      ---
+      duration_ms: 0.335488
+      type: 'test'
+      ...
+    1..4
+ok 45 - P4 Unit Test 2: Text-to-Speech Abstraction
+  ---
+  duration_ms: 1.657851
+  type: 'suite'
+  ...
+# Subtest: P4 Unit Test 3: Voice Translation Orchestration using P3 Engine
+    # Subtest: Orchestrator reuses P3 translation engine for VI -> RU translation
+    ok 1 - Orchestrator reuses P3 translation engine for VI -> RU translation
+      ---
+      duration_ms: 1.505584
+      type: 'test'
+      ...
+    # Subtest: Orchestrator reuses P3 translation engine for RU -> VI translation
+    ok 2 - Orchestrator reuses P3 translation engine for RU -> VI translation
+      ---
+      duration_ms: 0.357012
+      type: 'test'
+      ...
+    # Subtest: Rejects empty transcript without sending to translation
+    ok 3 - Rejects empty transcript without sending to translation
+      ---
+      duration_ms: 0.240832
+      type: 'test'
+      ...
+    # Subtest: State machine transitions cleanly on stop and cancel
+    ok 4 - State machine transitions cleanly on stop and cancel
+      ---
+      duration_ms: 0.412323
+      type: 'test'
+      ...
+    1..4
+ok 46 - P4 Unit Test 3: Voice Translation Orchestration using P3 Engine
+  ---
+  duration_ms: 2.804633
+  type: 'suite'
+  ...
+# Subtest: P4 Unit Test 4: 2-Way Conversation Message Model & History
+    # Subtest: Submitting manual turns generates structured ConversationMessage objects
+    ok 1 - Submitting manual turns generates structured ConversationMessage objects
+      ---
+      duration_ms: 3.233138
+      type: 'test'
+      ...
+    # Subtest: Clearing conversation history resets session messages without touching storage
+    ok 2 - Clearing conversation history resets session messages without touching storage
+      ---
+      duration_ms: 0.250274
+      type: 'test'
+      ...
+    1..2
+ok 47 - P4 Unit Test 4: 2-Way Conversation Message Model & History
+  ---
+  duration_ms: 3.80976
+  type: 'suite'
+  ...
+# Subtest: P4 Function Tests (F1 to F16)
+    # Subtest: F1 Voice screen opens / module exports valid structure
+    ok 1 - F1 Voice screen opens / module exports valid structure
+      ---
+      duration_ms: 3.050206
+      type: 'test'
+      ...
+    # Subtest: F2 Select VI → RU direction is valid
+    ok 2 - F2 Select VI → RU direction is valid
+      ---
+      duration_ms: 0.214548
+      type: 'test'
+      ...
+    # Subtest: F3 Select RU → VI direction is valid
+    ok 3 - F3 Select RU → VI direction is valid
+      ---
+      duration_ms: 0.183332
+      type: 'test'
+      ...
+    # Subtest: F4 Microphone state machine transitions
+    ok 4 - F4 Microphone state machine transitions
+      ---
+      duration_ms: 0.309065
+      type: 'test'
+      ...
+    # Subtest: F5 Transcript displayed accurately without fabrication
+    ok 5 - F5 Transcript displayed accurately without fabrication
+      ---
+      duration_ms: 0.190934
+      type: 'test'
+      ...
+    # Subtest: F6 Translation uses P3 engine directly
+    ok 6 - F6 Translation uses P3 engine directly
+      ---
+      duration_ms: 0.352372
+      type: 'test'
+      ...
+    # Subtest: F7 TTS uses correct language (vi-VN vs ru-RU)
+    ok 7 - F7 TTS uses correct language (vi-VN vs ru-RU)
+      ---
+      duration_ms: 0.221178
+      type: 'test'
+      ...
+    # Subtest: F8 Conversation VI → RU flow creates valid message
+    ok 8 - F8 Conversation VI → RU flow creates valid message
+      ---
+      duration_ms: 0.780057
+      type: 'test'
+      ...
+    # Subtest: F9 Conversation RU → VI flow creates valid message
+    ok 9 - F9 Conversation RU → VI flow creates valid message
+      ---
+      duration_ms: 0.603586
+      type: 'test'
+      ...
+    # Subtest: F10 Conversation history preserves order and timestamps
+    ok 10 - F10 Conversation history preserves order and timestamps
+      ---
+      duration_ms: 0.273989
+      type: 'test'
+      ...
+    # Subtest: F11 Clear conversation removes history
+    ok 11 - F11 Clear conversation removes history
+      ---
+      duration_ms: 0.168249
+      type: 'test'
+      ...
+    # Subtest: F12 Stop and cancel reset active state
+    ok 12 - F12 Stop and cancel reset active state
+      ---
+      duration_ms: 0.444989
+      type: 'test'
+      ...
+    # Subtest: F13 Permission denied error handler is structured
+    ok 13 - F13 Permission denied error handler is structured
+      ---
+      duration_ms: 0.390419
+      type: 'test'
+      ...
+    # Subtest: F14 Recognition failure handles cleanly without crash
+    ok 14 - F14 Recognition failure handles cleanly without crash
+      ---
+      duration_ms: 0.327718
+      type: 'test'
+      ...
+    # Subtest: F15 Translation failure notifies user honestly without fake AI
+    ok 15 - F15 Translation failure notifies user honestly without fake AI
+      ---
+      duration_ms: 121.968342
+      type: 'test'
+      ...
+    # Subtest: F16 TTS failure handles without fake audio success
+    ok 16 - F16 TTS failure handles without fake audio success
+      ---
+      duration_ms: 0.333701
+      type: 'test'
+      ...
+    1..16
+ok 48 - P4 Function Tests (F1 to F16)
+  ---
+  duration_ms: 131.791646
+  type: 'suite'
+  ...
+# Subtest: P5 Unit Test 1: OCR Service Abstraction & Cyrillic Recognition
+    # Subtest: Service exposes standard methods
+    ok 1 - Service exposes standard methods
+      ---
+      duration_ms: 1.263942
+      type: 'test'
+      ...
+    # Subtest: Cyrillic detection correctly identifies Russian text and rejects Latin-only text
+    ok 2 - Cyrillic detection correctly identifies Russian text and rejects Latin-only text
+      ---
+      duration_ms: 0.348752
+      type: 'test'
+      ...
+    # Subtest: Language detector classifies ru, vi, en, and unknown correctly
+    ok 3 - Language detector classifies ru, vi, en, and unknown correctly
+      ---
+      duration_ms: 0.430685
+      type: 'test'
+      ...
+    # Subtest: Sanitize text removes extra whitespace, carriage returns and filters empty lines
+    ok 4 - Sanitize text removes extra whitespace, carriage returns and filters empty lines
+      ---
+      duration_ms: 0.378778
+      type: 'test'
+      ...
+    1..4
+ok 49 - P5 Unit Test 1: OCR Service Abstraction & Cyrillic Recognition
+  ---
+  duration_ms: 4.164092
+  type: 'suite'
+  ...
+# Subtest: P5 Unit Test 2: Sample Russian Signage Dataset & Offline Recognition
+    # Subtest: Dataset contains high-quality real Russian signs across essential life categories
+    ok 1 - Dataset contains high-quality real Russian signs across essential life categories
+      ---
+      duration_ms: 0.454729
+      type: 'test'
+      ...
+    # Subtest: Every sample contains valid Cyrillic lines and non-empty translation reference
+    ok 2 - Every sample contains valid Cyrillic lines and non-empty translation reference
+      ---
+      duration_ms: 0.215443
+      type: 'test'
+      ...
+    # Subtest: recognizeFromSample returns high confidence result with lines for valid sample ID
+    ok 3 - recognizeFromSample returns high confidence result with lines for valid sample ID
+      ---
+      duration_ms: 0.52751
+      type: 'test'
+      ...
+    # Subtest: recognizeFromSample returns structured error for non-existent sample ID
+    ok 4 - recognizeFromSample returns structured error for non-existent sample ID
+      ---
+      duration_ms: 0.216083
+      type: 'test'
+      ...
+    1..4
+ok 50 - P5 Unit Test 2: Sample Russian Signage Dataset & Offline Recognition
+  ---
+  duration_ms: 1.691847
+  type: 'suite'
+  ...
+# Subtest: P5 Unit Test 3: OCR Result Validation & Error Handling
+    # Subtest: validateResult rejects null or undefined input
+    ok 1 - validateResult rejects null or undefined input
+      ---
+      duration_ms: 0.356054
+      type: 'test'
+      ...
+    # Subtest: validateResult rejects failed result and preserves error message
+    ok 2 - validateResult rejects failed result and preserves error message
+      ---
+      duration_ms: 0.174587
+      type: 'test'
+      ...
+    # Subtest: validateResult rejects empty rawText
+    ok 3 - validateResult rejects empty rawText
+      ---
+      duration_ms: 0.185798
+      type: 'test'
+      ...
+    # Subtest: validateResult rejects low confidence below 0.2
+    ok 4 - validateResult rejects low confidence below 0.2
+      ---
+      duration_ms: 0.201241
+      type: 'test'
+      ...
+    # Subtest: recognizeText rejects blank text with EMPTY_RESULT code
+    ok 5 - recognizeText rejects blank text with EMPTY_RESULT code
+      ---
+      duration_ms: 0.360465
+      type: 'test'
+      ...
+    1..5
+ok 51 - P5 Unit Test 3: OCR Result Validation & Error Handling
+  ---
+  duration_ms: 1.568078
+  type: 'suite'
+  ...
+# Subtest: P5 Unit Test 4: Camera Service Contract & Permissions
+    # Subtest: Camera service methods exist and provide proper interface
+    ok 1 - Camera service methods exist and provide proper interface
+      ---
+      duration_ms: 0.270251
+      type: 'test'
+      ...
+    # Subtest: In non-browser environment, isSupported returns false cleanly
+    ok 2 - In non-browser environment, isSupported returns false cleanly
+      ---
+      duration_ms: 0.179348
+      type: 'test'
+      ...
+    # Subtest: In non-browser environment, startCamera reports unsupported gracefully without throw
+    ok 3 - In non-browser environment, startCamera reports unsupported gracefully without throw
+      ---
+      duration_ms: 0.479842
+      type: 'test'
+      ...
+    # Subtest: stopCamera can be called safely without active stream
+    ok 4 - stopCamera can be called safely without active stream
+      ---
+      duration_ms: 0.352024
+      type: 'test'
+      ...
+    1..4
+ok 52 - P5 Unit Test 4: Camera Service Contract & Permissions
+  ---
+  duration_ms: 1.563158
+  type: 'suite'
+  ...
+# Subtest: P5 Integration: OCR → Translation Pipeline
+    # Subtest: OCR result translates correctly through P3 translation engine
+    ok 1 - OCR result translates correctly through P3 translation engine
+      ---
+      duration_ms: 2.715682
+      type: 'test'
+      ...
+    # Subtest: Recognized single-word Russian sign integrates with dictionary/translation
+    ok 2 - Recognized single-word Russian sign integrates with dictionary/translation
+      ---
+      duration_ms: 0.765407
+      type: 'test'
+      ...
+    1..2
+ok 53 - P5 Integration: OCR → Translation Pipeline
+  ---
+  duration_ms: 3.779304
+  type: 'suite'
+  ...
+# Subtest: P6 Unit Test 1: Provider Abstraction & Interface Contracts
+    # Subtest: All providers implement standard IAIAssistantProvider contract
+    ok 1 - All providers implement standard IAIAssistantProvider contract
+      ---
+      duration_ms: 1.578944
+      type: 'test'
+      ...
+    # Subtest: AssistantService exposes conversation orchestration methods
+    ok 2 - AssistantService exposes conversation orchestration methods
+      ---
+      duration_ms: 0.253441
+      type: 'test'
+      ...
+    # Subtest: Preset topics cover vital Russian survival domains
+    ok 3 - Preset topics cover vital Russian survival domains
+      ---
+      duration_ms: 0.362548
+      type: 'test'
+      ...
+    1..3
+ok 54 - P6 Unit Test 1: Provider Abstraction & Interface Contracts
+  ---
+  duration_ms: 4.104868
+  type: 'suite'
+  ...
+# Subtest: P6 Unit Test 2: Offline Local Knowledge Base & Keyword Matching
+    # Subtest: Local knowledge base contains articles on Registration, Metro, Winter, Health, Banking and Etiquette
+    ok 1 - Local knowledge base contains articles on Registration, Metro, Winter, Health, Banking and Etiquette
+      ---
+      duration_ms: 0.413791
+      type: 'test'
+      ...
+    # Subtest: Querying registration topic returns structured legal registration guide
+    ok 2 - Querying registration topic returns structured legal registration guide
+      ---
+      duration_ms: 0.622962
+      type: 'test'
+      ...
+    # Subtest: Querying metro/troika returns Moscow metro and Troika card guide
+    ok 3 - Querying metro/troika returns Moscow metro and Troika card guide
+      ---
+      duration_ms: 0.354126
+      type: 'test'
+      ...
+    # Subtest: Querying medical emergency returns 112 and pharmacy guidelines
+    ok 4 - Querying medical emergency returns 112 and pharmacy guidelines
+      ---
+      duration_ms: 0.316457
+      type: 'test'
+      ...
+    # Subtest: Empty user prompt returns structured error code EMPTY_PROMPT
+    ok 5 - Empty user prompt returns structured error code EMPTY_PROMPT
+      ---
+      duration_ms: 0.263464
+      type: 'test'
+      ...
+    1..5
+ok 55 - P6 Unit Test 2: Offline Local Knowledge Base & Keyword Matching
+  ---
+  duration_ms: 2.406705
+  type: 'suite'
+  ...
+# Subtest: P6 Unit Test 3: Mock Provider & Failure Mode Injection
+    # Subtest: Mock provider returns simulated response under normal conditions
+    ok 1 - Mock provider returns simulated response under normal conditions
+      ---
+      duration_ms: 1.007025
+      type: 'test'
+      ...
+    # Subtest: Mock provider handles simulated timeout cleanly
+    ok 2 - Mock provider handles simulated timeout cleanly
+      ---
+      duration_ms: 0.447908
+      type: 'test'
+      ...
+    # Subtest: Mock provider handles simulated provider error cleanly
+    ok 3 - Mock provider handles simulated provider error cleanly
+      ---
+      duration_ms: 0.454461
+      type: 'test'
+      ...
+    # Subtest: Mock provider handles invalid response structure
+    ok 4 - Mock provider handles invalid response structure
+      ---
+      duration_ms: 0.558296
+      type: 'test'
+      ...
+    1..4
+ok 56 - P6 Unit Test 3: Mock Provider & Failure Mode Injection
+  ---
+  duration_ms: 2.858445
+  type: 'suite'
+  ...
+# Subtest: P6 Unit Test 4: Conversation State Machine & Orchestrator
+    # Subtest: Initial state contains exactly the welcome message
+    ok 1 - Initial state contains exactly the welcome message
+      ---
+      duration_ms: 0.872702
+      type: 'test'
+      ...
+    # Subtest: Asking question appends user message and assistant reply to history
+    ok 2 - Asking question appends user message and assistant reply to history
+      ---
+      duration_ms: 0.648177
+      type: 'test'
+      ...
+    # Subtest: Rejects whitespace-only prompt with error and does not corrupt history
+    ok 3 - Rejects whitespace-only prompt with error and does not corrupt history
+      ---
+      duration_ms: 0.365578
+      type: 'test'
+      ...
+    # Subtest: Clear history resets messages back to welcome message only
+    ok 4 - Clear history resets messages back to welcome message only
+      ---
+      duration_ms: 0.558386
+      type: 'test'
+      ...
+    1..4
+ok 57 - P6 Unit Test 4: Conversation State Machine & Orchestrator
+  ---
+  duration_ms: 2.907877
+  type: 'suite'
+  ...
+# Subtest: P6 Integration & Security: Zero-Secret Frontend & Safe Fallback
+    # Subtest: Client bundle does not contain hard-coded Gemini API keys
+    ok 1 - Client bundle does not contain hard-coded Gemini API keys
+      ---
+      duration_ms: 0.240888
+      type: 'test'
+      ...
+    # Subtest: Switching active provider is dynamically supported
+    ok 2 - Switching active provider is dynamically supported
+      ---
+      duration_ms: 0.199729
+      type: 'test'
+      ...
+    1..2
+ok 58 - P6 Integration & Security: Zero-Secret Frontend & Safe Fallback
+  ---
+  duration_ms: 0.667442
+  type: 'suite'
+  ...
+# [RussiaAI][TextToSpeechService] ⚠️ Trình duyệt hiện tại chưa hỗ trợ Text-to-Speech (speechSynthesis). 
+# Subtest: P7 Unit Test 1: Real-Life Dataset 100% Validation Gate
+    # Subtest: Automated dataset validation returns 100% valid with zero errors
+    ok 1 - Automated dataset validation returns 100% valid with zero errors
+      ---
+      duration_ms: 2.057864
+      type: 'test'
+      ...
+    # Subtest: All scenarios cover required real-life categories
+    ok 2 - All scenarios cover required real-life categories
+      ---
+      duration_ms: 0.621697
+      type: 'test'
+      ...
+    # Subtest: Emergency hotlines include national 112, 103, 102, 101 and Vietnam Embassy in Moscow
+    ok 3 - Emergency hotlines include national 112, 103, 102, 101 and Vietnam Embassy in Moscow
+      ---
+      duration_ms: 0.404965
+      type: 'test'
+      ...
+    1..3
+ok 59 - P7 Unit Test 1: Real-Life Dataset 100% Validation Gate
+  ---
+  duration_ms: 4.923129
+  type: 'suite'
+  ...
+# Subtest: P7 Unit Test 2: RealLifeService Retrieval & Navigation
+    # Subtest: getAllScenarios returns complete scenario list
+    ok 1 - getAllScenarios returns complete scenario list
+      ---
+      duration_ms: 0.379116
+      type: 'test'
+      ...
+    # Subtest: getScenarioById retrieves correct scenario
+    ok 2 - getScenarioById retrieves correct scenario
+      ---
+      duration_ms: 0.445963
+      type: 'test'
+      ...
+    # Subtest: getScenarioById returns undefined for non-existent ID without throw
+    ok 3 - getScenarioById returns undefined for non-existent ID without throw
+      ---
+      duration_ms: 0.216843
+      type: 'test'
+      ...
+    # Subtest: getPhrasesByCategory returns phrases for valid category
+    ok 4 - getPhrasesByCategory returns phrases for valid category
+      ---
+      duration_ms: 0.29369
+      type: 'test'
+      ...
+    1..4
+ok 60 - P7 Unit Test 2: RealLifeService Retrieval & Navigation
+  ---
+  duration_ms: 1.736786
+  type: 'suite'
+  ...
+# Subtest: P7 Unit Test 3: Search & Keyword Filter Logic
+    # Subtest: Empty search query returns all scenarios and empty phrase list
+    ok 1 - Empty search query returns all scenarios and empty phrase list
+      ---
+      duration_ms: 0.483932
+      type: 'test'
+      ...
+    # Subtest: Searching "112" finds emergency scenario and phrases
+    ok 2 - Searching "112" finds emergency scenario and phrases
+      ---
+      duration_ms: 0.731243
+      type: 'test'
+      ...
+    # Subtest: Searching Russian keyword "паспорт" finds passport loss and administrative phrases
+    ok 3 - Searching Russian keyword "паспорт" finds passport loss and administrative phrases
+      ---
+      duration_ms: 0.375707
+      type: 'test'
+      ...
+    # Subtest: Searching Vietnamese keyword "thuốc" finds medical scenario and phrases
+    ok 4 - Searching Vietnamese keyword "thuốc" finds medical scenario and phrases
+      ---
+      duration_ms: 0.517561
+      type: 'test'
+      ...
+    # Subtest: Searching non-matching string returns empty results gracefully
+    ok 5 - Searching non-matching string returns empty results gracefully
+      ---
+      duration_ms: 0.490632
+      type: 'test'
+      ...
+    1..5
+ok 61 - P7 Unit Test 3: Search & Keyword Filter Logic
+  ---
+  duration_ms: 3.284689
+  type: 'suite'
+  ...
+# Subtest: P7 Integration: Voice & Translation Service Integration
+    # Subtest: speakPhrase delegates to speech synthesis gracefully
+    ok 1 - speakPhrase delegates to speech synthesis gracefully
+      ---
+      duration_ms: 16.239941
+      type: 'test'
+      ...
+    # Subtest: translateCustom translates real-life Russian text through P3 engine
+    ok 2 - translateCustom translates real-life Russian text through P3 engine
+      ---
+      duration_ms: 1.132848
+      type: 'test'
+      ...
+    1..2
+ok 62 - P7 Integration: Voice & Translation Service Integration
+  ---
+  duration_ms: 17.676548
+  type: 'suite'
+  ...
+# Subtest: P8 Unit Test 1: Offline Capability Registry & Verification
+    # Subtest: Explicit capability registry identifies offline vs online features
+    ok 1 - Explicit capability registry identifies offline vs online features
+      ---
+      duration_ms: 1.606226
+      type: 'test'
+      ...
+    # Subtest: All core educational content is offline-resident in memory
+    ok 2 - All core educational content is offline-resident in memory
+      ---
+      duration_ms: 0.712629
+      type: 'test'
+      ...
+    1..2
+ok 63 - P8 Unit Test 1: Offline Capability Registry & Verification
+  ---
+  duration_ms: 3.958264
+  type: 'suite'
+  ...
+# Subtest: P8 Unit Test 2: Local Storage & Offline Persistence
+    # Subtest: SafeStorage operates deterministically in offline memory fallback
+    ok 1 - SafeStorage operates deterministically in offline memory fallback
+      ---
+      duration_ms: 0.440886
+      type: 'test'
+      ...
+    # Subtest: Translation history persists and restores in offline mode
+    ok 2 - Translation history persists and restores in offline mode
+      ---
+      duration_ms: 0.410052
+      type: 'test'
+      ...
+    1..2
+ok 64 - P8 Unit Test 2: Local Storage & Offline Persistence
+  ---
+  duration_ms: 1.036225
+  type: 'suite'
+  ...
+# Subtest: P8 Integration: The Mandatory 5-Step Offline Lifecycle Gate
+    # Subtest: Step 1: System is initialized in Online state
+    ok 1 - Step 1: System is initialized in Online state
+      ---
+      duration_ms: 0.332291
+      type: 'test'
+      ...
+    # Subtest: Step 2: Network failure occurs (offline simulated)
+    ok 2 - Step 2: Network failure occurs (offline simulated)
+      ---
+      duration_ms: 0.153252
+      type: 'test'
+      ...
+    # Subtest: Step 3: Offline Fallback behaves correctly across subsystems
+    ok 3 - Step 3: Offline Fallback behaves correctly across subsystems
+      ---
+      duration_ms: 1.475052
+      type: 'test'
+      ...
+    # Subtest: Step 4 & 5: Recovery and Online connectivity restored
+    ok 4 - Step 4 & 5: Recovery and Online connectivity restored
+      ---
+      duration_ms: 0.286325
+      type: 'test'
+      ...
+    1..4
+ok 65 - P8 Integration: The Mandatory 5-Step Offline Lifecycle Gate
+  ---
+  duration_ms: 2.500613
+  type: 'suite'
+  ...
+# [RussiaAI][SecurityTest] ❌ Test safe error log Error: Safe simulation
+#     at <anonymous> (/app/applet/tests/p9-security.test.ts:100:59)
+#     at getActual (node:assert:609:5)
+#     at Function.doesNotThrow (node:assert:777:32)
+#     at TestContext.<anonymous> (/app/applet/tests/p9-security.test.ts:99:12)
+#     at Test.runInAsyncScope (node:async_hooks:214:14)
+#     at Test.run (node:internal/test_runner/test:1047:25)
+#     at Test.start (node:internal/test_runner/test:944:17)
+#     at node:internal/test_runner/test:1440:71
+#     at node:internal/per_context/primordials:466:82
+#     at new Promise (<anonymous>)
+# [RussiaAI][SecurityTest] ⚠️ Test warning log { attempt: 1 }
+# [RussiaAI][SecurityTest] Test info log 
+# Subtest: P9 Unit Test 1: Codebase Secret Scanning & Zero-Secrets Gate
+    # Subtest: Secret scanner inspects repository and finds zero embedded API keys or credentials
+    ok 1 - Secret scanner inspects repository and finds zero embedded API keys or credentials
+      ---
+      duration_ms: 757.034364
+      type: 'test'
+      ...
+    # Subtest: .env.example contains only non-secret placeholders
+    ok 2 - .env.example contains only non-secret placeholders
+      ---
+      duration_ms: 0.491657
+      type: 'test'
+      ...
+    1..2
+ok 66 - P9 Unit Test 1: Codebase Secret Scanning & Zero-Secrets Gate
+  ---
+  duration_ms: 760.116395
+  type: 'suite'
+  ...
+# Subtest: P9 Unit Test 2: Runtime Permission Handling & Graceful Denial
+    # Subtest: Camera service reports unsupported or permission denied gracefully without crash
+    ok 1 - Camera service reports unsupported or permission denied gracefully without crash
+      ---
+      duration_ms: 0.545551
+      type: 'test'
+      ...
+    # Subtest: Speech recognition service handles permission denial gracefully
+    ok 2 - Speech recognition service handles permission denial gracefully
+      ---
+      duration_ms: 1.27989
+      type: 'test'
+      ...
+    1..2
+ok 67 - P9 Unit Test 2: Runtime Permission Handling & Graceful Denial
+  ---
+  duration_ms: 2.104413
+  type: 'suite'
+  ...
+# Subtest: P9 Unit Test 3: Log Sanitization & Safe Error Display
+    # Subtest: Logger handles error details safely without throwing
+    ok 1 - Logger handles error details safely without throwing
+      ---
+      duration_ms: 4.422742
+      type: 'test'
+      ...
+    # Subtest: User data storage keys do not store passwords or account credentials
+    ok 2 - User data storage keys do not store passwords or account credentials
+      ---
+      duration_ms: 0.481365
+      type: 'test'
+      ...
+    1..2
+ok 68 - P9 Unit Test 3: Log Sanitization & Safe Error Display
+  ---
+  duration_ms: 5.201233
+  type: 'suite'
+  ...
+1..68
+# tests 182
+# suites 68
+# pass 182
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 18645.858386
+-------------------------------|---------|----------|---------|---------|---------------------------
+File                           | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s         
+-------------------------------|---------|----------|---------|---------|---------------------------
+All files                      |   67.04 |    77.47 |    83.2 |   67.04 |                           
+ components/ui                 |   52.22 |      100 |     100 |   52.22 |                           
+  Button.tsx                   |   70.42 |      100 |     100 |   70.42 | 48-68                     
+  Card.tsx                     |   76.47 |      100 |     100 |   76.47 | 37-48                     
+  EmptyState.tsx               |   34.09 |      100 |     100 |   34.09 | 16-44                     
+  IconButton.tsx               |   94.91 |      100 |     100 |   94.91 | 54-56                     
+  Modal.tsx                    |   16.66 |      100 |     100 |   16.66 | 17-96                     
+  SectionHeader.tsx            |   30.76 |      100 |     100 |   30.76 | 13-39                     
+ data/dictionary               |   92.48 |    33.33 |      80 |   92.48 |                           
+  index.ts                     |     100 |      100 |     100 |     100 |                           
+  manifest.ts                  |   86.66 |      100 |   66.66 |   86.66 | 10-11                     
+  schema.ts                    |   74.28 |    23.07 |     100 |   74.28 | ...7,51,53-54,59-60,63-64 
+  types.ts                     |     100 |      100 |     100 |     100 |                           
+ data/dictionary/data          |   99.68 |    82.69 |      80 |   99.68 |                           
+  expandedWords.ts             |     100 |      100 |     100 |     100 |                           
+  index.ts                     |   96.64 |    82.69 |      80 |   96.64 | 86-87,128,144-145         
+  words.ts                     |     100 |      100 |     100 |     100 |                           
+ data/dictionary/data/examples |     100 |      100 |     100 |     100 |                           
+  index.ts                     |     100 |      100 |     100 |     100 |                           
+  practicalExamples.ts         |     100 |      100 |     100 |     100 |                           
+ data/dictionary/data/grammar  |     100 |      100 |     100 |     100 |                           
+  conjugationRules.ts          |     100 |      100 |     100 |     100 |                           
+  declensionRules.ts           |     100 |      100 |     100 |     100 |                           
+  index.ts                     |     100 |      100 |     100 |     100 |                           
+ data/dictionary/data/phrases  |     100 |      100 |     100 |     100 |                           
+  commonPhrases.ts             |     100 |      100 |     100 |     100 |                           
+  index.ts                     |     100 |      100 |     100 |     100 |                           
+ data/dictionary/index         |   93.19 |    79.45 |     100 |   93.19 |                           
+  morphologyIndex.ts           |     100 |      100 |     100 |     100 |                           
+  normalize.ts                 |     100 |       80 |     100 |     100 | 23,32                     
+  searchIndex.ts               |    88.3 |    72.34 |     100 |    88.3 | ...40-141,143-144,146-147 
+ data/dictionary/services      |   88.39 |    92.98 |   77.77 |   88.39 |                           
+  dictionarySearch.ts          |     100 |      100 |     100 |     100 |                           
+  dictionaryService.ts         |   86.63 |       90 |   72.22 |   86.63 | ...19-127,133-137,143-149 
+  dictionarySourceService.ts   |    91.3 |     90.9 |   85.71 |    91.3 | 14-15,23-24               
+  morphologyService.ts         |   88.67 |      100 |      75 |   88.67 | 73-74,94-103              
+ hooks                         |   26.66 |      100 |      50 |   26.66 |                           
+  useOnlineStatus.ts           |   26.66 |      100 |      50 |   26.66 | 5-15                      
+ modules/assistant             |   51.36 |      100 |     100 |   51.36 |                           
+  AssistantModule.tsx          |   11.25 |      100 |     100 |   11.25 | 10-80                     
+  index.ts                     |     100 |      100 |     100 |     100 |                           
+  types.ts                     |     100 |      100 |     100 |     100 |                           
+ modules/assistant/components  |   10.56 |      100 |     100 |   10.56 |                           
+  AssistantChatView.tsx        |   10.56 |      100 |     100 |   10.56 | 31-284                    
+ modules/assistant/services    |   78.03 |    87.27 |   86.66 |   78.03 |                           
+  assistantService.ts          |   90.07 |    77.77 |     100 |   90.07 | 31,36-37,46-47,115-122    
+  geminiAssistantProvider.ts   |   24.47 |      100 |      60 |   24.47 | 31-33,36-140              
+  localKnowledgeProvider.ts    |    95.2 |    93.75 |     100 |    95.2 | 240-252                   
+  mockAssistantProvider.ts     |   90.43 |    88.88 |      80 |   90.43 | 28-29,59-60,82-88         
+ modules/camera/services       |   62.84 |    78.43 |   69.56 |   62.84 |                           
+  cameraService.ts             |   44.44 |       60 |      50 |   44.44 | ...40-142,148-162,168-195 
+  ocrService.ts                |   72.48 |    82.92 |    90.9 |   72.48 | 234-235,259-358,365-366   
+ modules/learning              |   73.85 |      100 |     100 |   73.85 |                           
+  LearningModule.tsx           |   38.83 |      100 |     100 |   38.83 | 41-103                    
+  index.ts                     |     100 |      100 |     100 |     100 |                           
+  types.ts                     |     100 |      100 |     100 |     100 |                           
+ modules/learning/components   |    7.57 |      100 |     100 |    7.57 |                           
+  AlphabetSection.tsx          |    4.02 |      100 |     100 |    4.02 | 9-199                     
+  DictionarySection.tsx        |    9.58 |      100 |     100 |    9.58 | 63-647                    
+  FlashcardSection.tsx         |    3.86 |      100 |     100 |    3.86 | 9-207                     
+  LessonsSection.tsx           |    3.96 |      100 |     100 |    3.96 | 13-303                    
+  PhrasesSection.tsx           |    3.75 |      100 |     100 |    3.75 | 7-160                     
+  ProgressSummary.tsx          |    6.41 |      100 |     100 |    6.41 | 11-156                    
+  PronunciationSection.tsx     |    3.82 |      100 |     100 |    3.82 | 7-157                     
+  QuizSection.tsx              |    4.24 |      100 |     100 |    4.24 | 10-212                    
+  ReviewSection.tsx            |    7.31 |      100 |     100 |    7.31 | 10-123                    
+  VocabularySection.tsx        |   16.44 |      100 |     100 |   16.44 | 64-383                    
+ modules/learning/data         |     100 |       50 |     100 |     100 |                           
+  alphabet.ts                  |     100 |      100 |     100 |     100 |                           
+  expandedVocabulary.ts        |     100 |      100 |     100 |     100 |                           
+  lessons.ts                   |     100 |      100 |     100 |     100 |                           
+  phrases.ts                   |     100 |      100 |     100 |     100 |                           
+  pronunciation.ts             |     100 |      100 |     100 |     100 |                           
+  vocabulary.ts                |     100 |       50 |     100 |     100 | 1171                      
+ modules/learning/services     |   95.02 |    66.66 |   86.66 |   95.02 |                           
+  learningStorage.ts           |   95.55 |    47.05 |     100 |   95.55 | 25-26,37-38               
+  quizService.ts               |     100 |    88.88 |     100 |     100 | 75                        
+  reviewService.ts             |   81.81 |      100 |      60 |   81.81 | 17-19,22-24               
+ modules/reallife              |   27.51 |      100 |     100 |   27.51 |                           
+  RealLifeModule.tsx           |    9.62 |      100 |     100 |    9.62 | 24-239                    
+  index.ts                     |     100 |      100 |     100 |     100 |                           
+  types.ts                     |     100 |      100 |     100 |     100 |                           
+ modules/reallife/components   |   11.24 |      100 |     100 |   11.24 |                           
+  EmergencyHotlinesView.tsx    |   10.97 |      100 |     100 |   10.97 | 10-82                     
+  PhraseItem.tsx               |   11.49 |      100 |     100 |   11.49 | 11-87                     
+ modules/reallife/data         |   94.87 |    26.31 |     100 |   94.87 |                           
+  scenariosData.ts             |   94.87 |    26.31 |     100 |   94.87 | ...26-527,529-530,532-533 
+ modules/reallife/services     |   97.89 |     91.3 |   88.88 |   97.89 |                           
+  realLifeService.ts           |   97.89 |     91.3 |   88.88 |   97.89 | 30-31                     
+ modules/translator            |   32.08 |      100 |     100 |   32.08 |                           
+  TranslatorModule.tsx         |     7.9 |      100 |     100 |     7.9 | 15-177                    
+  index.ts                     |     100 |      100 |     100 |     100 |                           
+  types.ts                     |     100 |      100 |     100 |     100 |                           
+ modules/translator/components |   12.55 |      100 |     100 |   12.55 |                           
+  LanguageSelector.tsx         |   18.42 |      100 |     100 |   18.42 | 15-76                     
+  TranslationHistory.tsx       |   10.34 |      100 |     100 |   10.34 | 13-116                    
+  TranslationInput.tsx         |    13.6 |      100 |     100 |    13.6 | 21-147                    
+  TranslationResult.tsx        |    9.56 |      100 |     100 |    9.56 | 12-115                    
+ modules/translator/services   |   75.18 |    69.38 |     100 |   75.18 |                           
+  translationHistory.ts        |   86.66 |    55.55 |     100 |   86.66 | 16-17,20-21,38-41         
+  translationService.ts        |   71.84 |     72.5 |     100 |   71.84 | ...95-136,152-153,174-181 
+ modules/voice                 |   34.28 |      100 |     100 |   34.28 |                           
+  VoiceModule.tsx              |   17.85 |      100 |     100 |   17.85 | 16-84                     
+  index.ts                     |     100 |      100 |     100 |     100 |                           
+ modules/voice/components      |    6.86 |      100 |     100 |    6.86 |                           
+  ConversationMessage.tsx      |   13.51 |      100 |     100 |   13.51 | 11-74                     
+  ConversationMode.tsx         |    3.39 |      100 |     100 |    3.39 | 10-265                    
+  VoiceControls.tsx            |   12.82 |      100 |     100 |   12.82 | 16-117                    
+  VoiceMode.tsx                |    4.05 |      100 |     100 |    4.05 | 12-271                    
+  VoiceStatus.tsx              |   12.35 |      100 |     100 |   12.35 | 12-89                     
+ modules/voice/services        |   53.64 |    78.26 |      70 |   53.64 |                           
+  speechRecognitionService.ts  |   39.37 |    58.82 |   71.42 |   39.37 | ...73-166,171-176,182-187 
+  textToSpeechService.ts       |   51.58 |    78.94 |   53.84 |   51.58 | ...96-101,106-113,116-123 
+  voiceTranslationService.ts   |   62.88 |    87.87 |   78.26 |   62.88 | ...90-291,297-298,320-323 
+ services                      |   86.05 |    64.81 |   89.65 |   86.05 |                           
+  config.ts                    |   86.27 |    55.55 |     100 |   86.27 | 11-13,15-16,23-24         
+  connectivity.ts              |   88.46 |       75 |     100 |   88.46 | 14,18-20,46-47            
+  logger.ts                    |   93.22 |       80 |    87.5 |   93.22 | 20-21,57-58               
+  offlineCapabilities.ts       |   97.19 |      100 |      80 |   97.19 | 102-104                   
+  storage.ts                   |   60.29 |    44.44 |   85.71 |   60.29 | ...0-41,49-50,52-53,57-65 
+ utils                         |   66.66 |      100 |      50 |   66.66 |                           
+  cn.ts                        |   66.66 |      100 |      50 |   66.66 | 5-6                       
+-------------------------------|---------|----------|---------|---------|---------------------------

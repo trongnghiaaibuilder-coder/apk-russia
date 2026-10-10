@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Be Vietnam Pro", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+/* ============ V2 THEME SYSTEM ============
+   Light mode: white-black theme
+   Dark mode: black-pink theme
+   ======================================== */
+:root {
+  color-scheme: light;
+  --v2-bg: #ffffff;
+  --v2-bg-soft: #f4f4f5;
+  --v2-card: #ffffff;
+  --v2-card-border: rgba(0, 0, 0, 0.08);
+  --v2-text: #111111;
+  --v2-text-muted: #6b7280;
+  --v2-text-faint: #9ca3af;
+  --v2-accent: #111111;
+  --v2-accent-soft: rgba(0, 0, 0, 0.06);
+  --v2-accent-text: #ffffff;
+  --v2-hero-from: #111111;
+  --v2-hero-to: #3f3f46;
+  --v2-nav-bg: rgba(255, 255, 255, 0.95);
+  --v2-input-bg: rgba(0, 0, 0, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --v2-bg: #000000;
+    --v2-bg-soft: #0a0a0a;
+    --v2-card: #111113;
+    --v2-card-border: rgba(255, 255, 255, 0.08);
+    --v2-text: #ffffff;
+    --v2-text-muted: #a1a1aa;
+    --v2-text-faint: #71717a;
+    --v2-accent: #ec4899;
+    --v2-accent-soft: rgba(236, 72, 153, 0.12);
+    --v2-accent-text: #ffffff;
+    --v2-hero-from: #ec4899;
+    --v2-hero-to: #be185d;
+    --v2-nav-bg: rgba(10, 10, 10, 0.95);
+    --v2-input-bg: rgba(255, 255, 255, 0.06);
+  }
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--v2-bg);
+  color: var(--v2-text);
+  font-family: var(--font-sans);
+  overscroll-behavior-y: none;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Semantic theme utilities */
+.v2-bg { background-color: var(--v2-bg); }
+.v2-bg-soft { background-color: var(--v2-bg-soft); }
+.v2-card {
+  background-color: var(--v2-card);
+  border: 1px solid var(--v2-card-border);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+.v2-text { color: var(--v2-text); }
+.v2-text-muted { color: var(--v2-text-muted); }
+.v2-text-faint { color: var(--v2-text-faint); }
+.v2-accent-bg { background-color: var(--v2-accent); color: var(--v2-accent-text); }
+.v2-accent-text { color: var(--v2-accent); }
+.v2-accent-soft { background-color: var(--v2-accent-soft); }
+.v2-nav-bg {
+  background-color: var(--v2-nav-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.v2-input {
+  background-color: var(--v2-input-bg);
+  border: 1px solid var(--v2-card-border);
+  color: var(--v2-text);
+}
+.v2-input::placeholder { color: var(--v2-text-faint); }
+.v2-hero {
+  background: linear-gradient(135deg, var(--v2-hero-from), var(--v2-hero-to));
+}
+.v2-divider { border-color: var(--v2-card-border); }
+
+/* Smooth scrolling for tab content */
+.v2-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(128, 128, 128, 0.3) transparent;
+}
+.v2-scroll::-webkit-scrollbar { width: 4px; }
+.v2-scroll::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.3);
+  border-radius: 999px;
+}
+
+/* Card entrance animation */
+@keyframes v2-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.v2-fade-up { animation: v2-fade-up 0.35s ease-out both; }
+.v2-fade-up-1 { animation-delay: 0.05s; }
+.v2-fade-up-2 { animation-delay: 0.1s; }
+.v2-fade-up-3 { animation-delay: 0.15s; }
+.v2-fade-up-4 { animation-delay: 0.2s; }
+
+/* Gentle pulse for recording / speaking indicators */
+@keyframes v2-soft-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.75; transform: scale(0.96); }
+}
+.v2-soft-pulse { animation: v2-soft-pulse 1.6s ease-in-out infinite; }
+
+/* Gradient text for hero titles */
+.v2-gradient-text {
+  background: linear-gradient(135deg, var(--v2-hero-from), var(--v2-hero-to));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

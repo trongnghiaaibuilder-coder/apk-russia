@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.log
+package-lock.json
+android/.gradle/
+android/app/build/
+android/build/
+.DS_Store
+*.local

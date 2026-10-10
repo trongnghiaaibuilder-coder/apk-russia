@@ -1,0 +1,35 @@
+[
+  {
+    "sourceId": "wiktionary-kaikki",
+    "sourceName": "Kaikki / Wiktionary Russian Dataset",
+    "license": "CC BY-SA 4.0 & GFDL",
+    "sourceUrl": "https://kaikki.org/dictionary/Russian/",
+    "retrievedAt": "2026-03-15T00:00:00Z",
+    "version": "2026.03",
+    "modified": true,
+    "attribution": "Derived from Wiktionary dumps via Kaikki.org project. Processed, translated to Vietnamese, and morphologically structured for Russia AI Support.",
+    "offlineCompliant": true
+  },
+  {
+    "sourceId": "opencorpora-morphology",
+    "sourceName": "OpenCorpora Russian Morphological Dictionary",
+    "license": "CC0 1.0 Universal (Public Domain)",
+    "sourceUrl": "http://opencorpora.org/",
+    "retrievedAt": "2026-03-15T00:00:00Z",
+    "version": "0.4.1",
+    "modified": true,
+    "attribution": "Morphological paradigms, declensions, and conjugations validated against OpenCorpora lexical database.",
+    "offlineCompliant": true
+  },
+  {
+    "sourceId": "project-authored",
+    "sourceName": "Russia AI Support Curated Lexicon",
+    "license": "Proprietary Project License",
+    "sourceUrl": "https://github.com/xuong-rong-ai/russia-ai-support",
+    "retrievedAt": "2026-03-30T00:00:00Z",
+    "version": "1.0.0",
+    "modified": false,
+    "attribution": "Curated practical travel, metro, medical, legal, and daily survival phrases with authentic Vietnamese learner context by Xương Rồng AI developer.",
+    "offlineCompliant": true
+  }
+]

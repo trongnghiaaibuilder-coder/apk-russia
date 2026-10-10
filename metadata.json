@@ -1,0 +1,6 @@
+{
+  "name": "Russia AI Support",
+  "description": "Mobile-first Russian learning, translation, voice, OCR, and AI assistant application by Xương Rồng AI developer.",
+  "requestFramePermissions": ["microphone", "camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

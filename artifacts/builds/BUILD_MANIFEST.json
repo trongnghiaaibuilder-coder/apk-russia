@@ -1,0 +1,32 @@
+{
+  "applicationId": "com.xuongrong.russiaai",
+  "appName": "Russia AI Support",
+  "developer": "Xương Rồng AI developer",
+  "versionName": "1.0.0",
+  "versionCode": 1,
+  "minSdkVersion": 24,
+  "targetSdkVersion": 34,
+  "buildType": "release",
+  "apkFileName": "russia-ai-support-v1.0.0.apk",
+  "apkPath": "artifacts/builds/russia-ai-support-v1.0.0.apk",
+  "sizeBytes": 251731,
+  "sha256Checksum": "980142cfb1e6e6a6a73443d69cb037823d6df5f87e23ebc18cf927cc2d2d007c",
+  "buildTimestamp": "2026-10-09T15:03:02.130Z",
+  "declaredPermissions": [
+    "android.permission.INTERNET",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.RECORD_AUDIO",
+    "android.permission.CAMERA",
+    "android.permission.MODIFY_AUDIO_SETTINGS"
+  ],
+  "features": [
+    "Russian Alphabet 33 Letters",
+    "113+ Vocabulary Items & 16 Lessons",
+    "Bilingual Text Translation (VI <-> RU)",
+    "2-Way Dual-Speaker Voice Conversation",
+    "Cyrillic Russian Signage OCR",
+    "Russia AI Assistant (Gemini 2.5 Flash & Offline Knowledge)",
+    "Emergency Hotline 112 & Embassy Support Handbook",
+    "100% Offline-First Architecture"
+  ]
+}

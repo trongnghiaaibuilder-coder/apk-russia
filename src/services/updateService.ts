@@ -1,0 +1,146 @@
+/**
+ * Hệ thống tự động cập nhật app.
+ * Developer: Xương Rồng AI Developer
+ *
+ * Cách hoạt động:
+ * 1. App đọc file version.json từ URL cấu hình (mặc định: GitHub releases).
+ * 2. So sánh versionCode với bản đang cài.
+ * 3. Nếu có bản mới: hiện thông báo, người dùng bấm "Cập nhật" để tải và cài.
+ *
+ * File version.json mẫu:
+ * {
+ *   "versionCode": 11,
+ *   "versionName": "2.9.0",
+ *   "apkUrl": "https://github.com/user/repo/releases/download/v2.9.0/app.apk",
+ *   "releaseNotes": "Sửa lỗi camera, thêm 262 câu mẫu",
+ *   "mandatory": false
+ * }
+ */
+
+export interface UpdateInfo {
+  versionCode: number;
+  versionName: string;
+  apkUrl: string;
+  releaseNotes: string;
+  mandatory: boolean;
+}
+
+export interface UpdateCheckResult {
+  hasUpdate: boolean;
+  currentVersion: string;
+  updateInfo: UpdateInfo | null;
+  error?: string;
+}
+
+// URL file version.json — đổi thành URL thật khi publish
+// Mặc định trỏ về GitHub releases của dự án
+const DEFAULT_UPDATE_URL = 'https://raw.githubusercontent.com/xuongrong/russia-ai-support/main/version.json';
+
+const UPDATE_URL_KEY = 'app_update_url';
+const LAST_CHECK_KEY = 'app_update_last_check';
+const SKIP_VERSION_KEY = 'app_update_skip_version';
+
+function getUpdateUrl(): string {
+  try {
+    const saved = localStorage.getItem(UPDATE_URL_KEY);
+    if (saved) return saved;
+  } catch {}
+  return DEFAULT_UPDATE_URL;
+}
+
+export function setUpdateUrl(url: string): void {
+  try {
+    localStorage.setItem(UPDATE_URL_KEY, url);
+  } catch {}
+}
+
+/** Version hiện tại của app (đồng bộ với versionName trong build) */
+export const CURRENT_VERSION_CODE = 13;
+export const CURRENT_VERSION_NAME = '2.9.2';
+
+export const updateService = {
+  /** Kiểm tra có bản cập nhật mới không */
+  async checkForUpdate(): Promise<UpdateCheckResult> {
+    const current = {
+      hasUpdate: false,
+      currentVersion: CURRENT_VERSION_NAME,
+      updateInfo: null as UpdateInfo | null,
+    };
+
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
+      // Thêm timestamp để tránh cache
+      const url = `${getUpdateUrl()}?t=${Date.now()}`;
+      const response = await fetch(url, {
+        signal: controller.signal,
+        cache: 'no-store',
+      });
+      clearTimeout(timeout);
+
+      if (!response.ok) {
+        return { ...current, error: 'Không kiểm tra được cập nhật lúc này.' };
+      }
+
+      const info: UpdateInfo = await response.json();
+
+      if (!info || typeof info.versionCode !== 'number' || !info.apkUrl) {
+        return { ...current, error: 'File cập nhật không hợp lệ.' };
+      }
+
+      // Kiểm tra người dùng đã bỏ qua bản này chưa
+      let skipped = 0;
+      try {
+        skipped = parseInt(localStorage.getItem(SKIP_VERSION_KEY) || '0', 10);
+      } catch {}
+
+      if (info.versionCode > CURRENT_VERSION_CODE && info.versionCode !== skipped) {
+        try {
+          localStorage.setItem(LAST_CHECK_KEY, new Date().toISOString());
+        } catch {}
+        return { hasUpdate: true, currentVersion: CURRENT_VERSION_NAME, updateInfo: info };
+      }
+
+      try {
+        localStorage.setItem(LAST_CHECK_KEY, new Date().toISOString());
+      } catch {}
+      return current;
+    } catch {
+      return { ...current, error: 'Không có mạng hoặc máy chủ cập nhật không phản hồi.' };
+    }
+  },
+
+  /** Bỏ qua bản cập nhật này (không nhắc lại) */
+  skipVersion(versionCode: number): void {
+    try {
+      localStorage.setItem(SKIP_VERSION_KEY, String(versionCode));
+    } catch {}
+  },
+
+  /** Tải APK cập nhật — mở bằng trình duyệt để tải về và cài đặt */
+  async downloadAndInstall(apkUrl: string): Promise<{ success: boolean; error?: string }> {
+    try {
+      // Mở URL APK bằng trình duyệt hệ thống — người dùng tải về và bấm cài đặt
+      const a = document.createElement('a');
+      a.href = apkUrl;
+      a.download = '';
+      a.target = '_blank';
+      a.rel = 'noopener';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      return { success: true };
+    } catch {
+      return { success: false, error: 'Không mở được link tải. Bạn copy link này mở bằng trình duyệt nhé.' };
+    }
+  },
+
+  /** Lấy thời gian kiểm tra lần cuối */
+  getLastCheckTime(): string | null {
+    try {
+      return localStorage.getItem(LAST_CHECK_KEY);
+    } catch {
+      return null;
+    }
+  },
+};
