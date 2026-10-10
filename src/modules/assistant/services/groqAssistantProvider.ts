@@ -17,7 +17,7 @@ import { appSettings } from '../../../services/appSettings';
 import { logger } from '../../../services/logger';
 
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-const GROQ_MODEL = 'llama-3.3-70b-versatile';
+const GROQ_MODELS = ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant'];
 
 const SYSTEM_PROMPT = `Bạn là trợ lý AI thân thiện của ứng dụng "Nước Nga Trong Tầm Tay", giúp người Việt học tiếng Nga và sinh sống tại Nga.
 Trả lời bằng tiếng Việt, ngắn gọn, dễ hiểu. Khi đưa ra câu tiếng Nga, kèm phiên âm cho người Việt đọc theo.
@@ -80,27 +80,60 @@ export class GroqAssistantProvider implements IAIAssistantProvider {
           .map(m => ({ role: m.role, content: m.content })),
       ];
 
-      const response = await fetch(GROQ_API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          model: GROQ_MODEL,
-          messages: chatMessages,
-          max_tokens: 1000,
-          temperature: 0.7,
-        }),
-        signal: controller.signal,
-      });
+      let response: Response | null = null;
+      let lastStatus = 0;
+      // Thử từng model cho đến khi thành công
+      for (const model of GROQ_MODELS) {
+        controller.signal.throwIfAborted();
+        const tryController = new AbortController();
+        const tryTimeout = setTimeout(() => tryController.abort(), this.timeoutMs);
+        try {
+          const r = await fetch(GROQ_API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${apiKey}`,
+            },
+            body: JSON.stringify({
+              model,
+              messages: chatMessages,
+              max_tokens: 1000,
+              temperature: 0.7,
+            }),
+            signal: tryController.signal,
+          });
+          clearTimeout(tryTimeout);
+          lastStatus = r.status;
+          if (r.ok) {
+            response = r;
+            break;
+          }
+          // 404 = model không tồn tại → thử model tiếp theo
+          // 401/429 → không thử tiếp, báo lỗi luôn
+          if (r.status !== 404) {
+            response = r;
+            break;
+          }
+        } catch {
+          clearTimeout(tryTimeout);
+        }
+      }
       clearTimeout(timeout);
 
-      if (!response.ok) {
-        const errText = await response.text().catch(() => '');
+      if (!response) {
+        const fallbackResp = await localKnowledgeProvider.sendMessage(messages, context);
+        return { ...fallbackResp, durationMs: Date.now() - startTime };
+      }
+
+      // Gán lại để code bên dưới dùng
+      const finalResponse = response;
+      response = finalResponse;
+
+      if (!finalResponse.ok) {
+        const errText = await finalResponse.text().catch(() => '');
         logger.warn('GroqAssistantProvider', `API error ${response.status}: ${errText.slice(0, 200)}`);
         // Key sai (401) hoặc hết quota → báo lỗi rõ ràng
-        if (response.status === 401) {
+        if (finalResponse.status === 401) {
           return {
             success: false,
             durationMs: Date.now() - startTime,
@@ -108,7 +141,7 @@ export class GroqAssistantProvider implements IAIAssistantProvider {
             error: 'Groq API key không đúng. Bạn kiểm tra lại key tại console.groq.com nhé.'
           };
         }
-        if (response.status === 429) {
+        if (finalResponse.status === 429) {
           return {
             success: false,
             durationMs: Date.now() - startTime,
@@ -121,7 +154,7 @@ export class GroqAssistantProvider implements IAIAssistantProvider {
         return { ...fallbackResp, durationMs: Date.now() - startTime };
       }
 
-      const data = await response.json();
+      const data = await finalResponse.json();
       const text = data?.choices?.[0]?.message?.content?.trim();
 
       if (!text) {

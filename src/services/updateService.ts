@@ -55,8 +55,8 @@ export function setUpdateUrl(url: string): void {
 }
 
 /** Version hiện tại của app (đồng bộ với versionName trong build) */
-export const CURRENT_VERSION_CODE = 23;
-export const CURRENT_VERSION_NAME = '2.14.2';
+export const CURRENT_VERSION_CODE = 24;
+export const CURRENT_VERSION_NAME = '2.14.3';
 
 export const updateService = {
   /** Kiểm tra có bản cập nhật mới không.
@@ -125,14 +125,14 @@ export const updateService = {
     // Fallback mở trình duyệt — dùng khi native thất bại
     const openInBrowser = (): { success: boolean; error?: string } => {
       try {
-        const a = document.createElement('a');
-        a.href = apkUrl;
-        a.target = '_blank';
-        a.rel = 'noopener';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        return { success: true, error: 'Đã mở trình duyệt để tải. Tải xong bạn mở file để cài đặt nhé.' };
+        const updater = (window as any).AndroidUpdater;
+        if (updater && typeof updater.openInBrowser === 'function') {
+          updater.openInBrowser(apkUrl);
+          return { success: true, error: 'Đã mở trình duyệt để tải. Tải xong bạn mở file để cài đặt nhé.' };
+        }
+        // Dự phòng: mở bằng thẻ a
+        window.open(apkUrl, '_blank');
+        return { success: true, error: 'Đã mở link tải. Tải xong bạn mở file để cài đặt nhé.' };
       } catch {
         return { success: false, error: 'Không mở được link tải.' };
       }
