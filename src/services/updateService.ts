@@ -55,8 +55,8 @@ export function setUpdateUrl(url: string): void {
 }
 
 /** Version hiện tại của app (đồng bộ với versionName trong build) */
-export const CURRENT_VERSION_CODE = 21;
-export const CURRENT_VERSION_NAME = '2.14.0';
+export const CURRENT_VERSION_CODE = 22;
+export const CURRENT_VERSION_NAME = '2.14.1';
 
 export const updateService = {
   /** Kiểm tra có bản cập nhật mới không.
@@ -122,6 +122,22 @@ export const updateService = {
 
   /** Tải và cài đặt APK — dùng native bridge (tự động tải + mở màn hình cài đặt), fallback mở trình duyệt */
   async downloadAndInstall(apkUrl: string): Promise<{ success: boolean; error?: string }> {
+    // Fallback mở trình duyệt — dùng khi native thất bại
+    const openInBrowser = (): { success: boolean; error?: string } => {
+      try {
+        const a = document.createElement('a');
+        a.href = apkUrl;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        return { success: true, error: 'Đã mở trình duyệt để tải. Tải xong bạn mở file để cài đặt nhé.' };
+      } catch {
+        return { success: false, error: 'Không mở được link tải.' };
+      }
+    };
+
     // Ưu tiên native bridge trên Android — tự động tải qua DownloadManager
     const updater = (window as any).AndroidUpdater;
     if (updater && typeof updater.downloadAndInstall === 'function') {
@@ -138,20 +154,25 @@ export const updateService = {
           finish({ success: true });
         };
         (window as any).__onUpdateError = (msg: string) => {
-          finish({ success: false, error: msg || 'Tải cập nhật thất bại.' });
+          // Native lỗi → tự động chuyển sang trình duyệt
+          finish(openInBrowser());
         };
         try {
           updater.downloadAndInstall(apkUrl);
         } catch (err: any) {
-          finish({ success: false, error: 'Không khởi động được quá trình cập nhật.' });
+          finish(openInBrowser());
           return;
         }
-        // Timeout 10 phút — nếu quá lâu thì báo
+        // Nếu 30 giây native không phản hồi → tự chuyển sang trình duyệt
         setTimeout(() => {
-          finish({ success: false, error: 'Tải quá lâu, bạn thử lại nhé.' });
-        }, 10 * 60 * 1000);
+          if (!done) {
+            finish(openInBrowser());
+          }
+        }, 30000);
       });
     }
+
+    return openInBrowser();
 
     // Fallback: mở URL để trình duyệt tải
     try {

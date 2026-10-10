@@ -1,7 +1,7 @@
 {
-  "versionCode": 21,
-  "versionName": "2.14.0",
-  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.14.0/russia-ai-support-v2.14.0.apk",
-  "releaseNotes": "Tích hợp Groq AI (miễn phí, tốc độ cao) vào Trợ lý",
+  "versionCode": 22,
+  "versionName": "2.14.1",
+  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.14.1/russia-ai-support-v2.14.1.apk",
+  "releaseNotes": "Sửa lỗi tải bản cập nhật bị kẹt",
   "mandatory": false
 }
