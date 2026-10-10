@@ -1,7 +1,7 @@
 {
-  "versionCode": 24,
-  "versionName": "2.14.3",
-  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.14.3/russia-ai-support-v2.14.3.apk",
-  "releaseNotes": "Sửa lỗi Groq 404 và mở trình duyệt khi cập nhật",
+  "versionCode": 25,
+  "versionName": "2.14.4",
+  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.14.4/russia-ai-support-v2.14.4.apk",
+  "releaseNotes": "Cập nhật model Groq mới (model cũ đã bị Groq ngừng)",
   "mandatory": false
 }

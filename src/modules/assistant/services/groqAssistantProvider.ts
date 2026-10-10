@@ -17,15 +17,15 @@ import { appSettings } from '../../../services/appSettings';
 import { logger } from '../../../services/logger';
 
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-const GROQ_MODELS = ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant'];
+const GROQ_MODELS = ['openai/gpt-oss-120b', 'openai/gpt-oss-20b', 'qwen/qwen3.6-27b'];
 
 const SYSTEM_PROMPT = `Bạn là trợ lý AI thân thiện của ứng dụng "Nước Nga Trong Tầm Tay", giúp người Việt học tiếng Nga và sinh sống tại Nga.
 Trả lời bằng tiếng Việt, ngắn gọn, dễ hiểu. Khi đưa ra câu tiếng Nga, kèm phiên âm cho người Việt đọc theo.
 Ưu tiên thông tin thực tế: visa, đăng ký tạm trú, metro, mua sắm, y tế, số khẩn cấp 112.`;
 
 export class GroqAssistantProvider implements IAIAssistantProvider {
-  readonly providerId = 'groq-llama-3.3';
-  readonly providerName = 'Groq Llama 3.3 (Trực tuyến, miễn phí)';
+  readonly providerId = 'groq-gpt-oss';
+  readonly providerName = 'Groq GPT-OSS (Trực tuyến, miễn phí)';
 
   private timeoutMs = 15000;
 
