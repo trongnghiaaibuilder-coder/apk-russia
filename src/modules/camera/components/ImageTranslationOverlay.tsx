@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Loader2, AlertCircle, Languages, RotateCcw, X } from 'lucide-react';
 import { realOcrService, OcrLine } from '../services/realOcrService';
 import { translationService } from '../../translator/services/translationService';
+import { transliterateRussian, containsCyrillic } from '../../../services/transliterationService';
 
 export interface ImageTranslationOverlayProps {
   /** Canvas chứa ảnh vừa chụp */
@@ -174,6 +175,9 @@ export const ImageTranslationOverlay: React.FC<ImageTranslationOverlayProps> = (
           {translatedLines.map((line, idx) => (
             <div key={idx} className="py-2 border-b v2-divider last:border-0">
               <p className="text-[12px] v2-text-muted">{line.text}</p>
+              {containsCyrillic(line.text) && (
+                <p className="text-[11px] v2-text-faint italic">📖 {transliterateRussian(line.text)}</p>
+              )}
               <p className="text-[14px] font-semibold v2-text mt-0.5">{line.translatedText}</p>
             </div>
           ))}

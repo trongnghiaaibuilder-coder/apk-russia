@@ -1,6 +1,7 @@
 import React from 'react';
 import { Volume2 } from 'lucide-react';
 import { ConversationMessage as MessageType } from '../types';
+import { transliterateRussian, containsCyrillic } from '../../../services/transliterationService';
 
 interface ConversationMessageProps {
   message: MessageType;
@@ -64,9 +65,16 @@ export const ConversationMessage: React.FC<ConversationMessageProps> = ({
 
         {/* Translated Text (Prominent) */}
         <div className="pt-1 border-t v2-divider/80 flex items-start justify-between gap-3">
-          <p className="text-sm sm:text-base font-bold v2-text leading-relaxed font-sans">
-            {message.translatedText}
-          </p>
+          <div className="flex-1">
+            <p className="text-sm sm:text-base font-bold v2-text leading-relaxed font-sans">
+              {message.translatedText}
+            </p>
+            {containsCyrillic(message.translatedText) && (
+              <p className="mt-1 text-xs v2-text-muted italic">
+                📖 {transliterateRussian(message.translatedText)}
+              </p>
+            )}
+          </div>
           <button
             type="button"
             onClick={() => onReplay(message)}

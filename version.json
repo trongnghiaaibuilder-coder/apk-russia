@@ -1,7 +1,7 @@
 {
-  "versionCode": 13,
-  "versionName": "2.9.2",
-  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.9.2/russia-ai-support-v2.9.2.apk",
-  "releaseNotes": "Sửa lỗi không mở được app, loại bỏ code native gây crash",
+  "versionCode": 14,
+  "versionName": "2.10.0",
+  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.10.0/russia-ai-support-v2.10.0.apk",
+  "releaseNotes": "Thêm vietsub (phiên âm) tiếng Nga; ký bằng key release chính thức để giảm cảnh báo Play Protect",
   "mandatory": false
 }

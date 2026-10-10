@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { OcrRecognitionResult } from '../types';
 import { Button } from '../../../components/ui/Button';
+import { transliterateRussian, containsCyrillic } from '../../../services/transliterationService';
 
 export interface OcrResultViewProps {
   result: OcrRecognitionResult;
@@ -94,6 +95,11 @@ export const OcrResultView: React.FC<OcrResultViewProps> = ({
         <pre className="text-sm font-sans font-medium v2-text whitespace-pre-wrap leading-relaxed tracking-wide">
           {result.rawText}
         </pre>
+        {containsCyrillic(result.rawText) && (
+          <p className="mt-2 text-xs v2-text-muted italic whitespace-pre-wrap">
+            📖 {transliterateRussian(result.rawText)}
+          </p>
+        )}
       </div>
 
       {/* Detailed Lines Breakdown */}

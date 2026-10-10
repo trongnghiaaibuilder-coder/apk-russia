@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Copy, Check, AlertCircle } from 'lucide-react';
 import { Card } from '../../../components/ui/Card';
 import { TranslationResult } from '../types';
+import { transliterateRussian, containsCyrillic } from '../../../services/transliterationService';
 
 interface TranslationResultCardProps {
   result: TranslationResult | null;
@@ -96,6 +97,11 @@ export const TranslationResultCard: React.FC<TranslationResultCardProps> = ({
         <p className="text-base sm:text-lg font-bold v2-text leading-relaxed select-text font-sans">
           {result.translatedText}
         </p>
+        {containsCyrillic(result.translatedText) && (
+          <p className="mt-1.5 text-sm v2-text-muted italic select-text">
+            📖 {transliterateRussian(result.translatedText)}
+          </p>
+        )}
       </div>
 
       {copyFeedback && (
