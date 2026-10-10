@@ -1,7 +1,7 @@
 {
-  "versionCode": 17,
-  "versionName": "2.11.2",
-  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.11.2/russia-ai-support-v2.11.2.apk",
-  "releaseNotes": "Sửa lỗi nút Tiếp theo bị ẩn trong màn hình hướng dẫn",
+  "versionCode": 18,
+  "versionName": "2.12.0",
+  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.12.0/russia-ai-support-v2.12.0.apk",
+  "releaseNotes": "Tự động tải và cài đặt khi cập nhật; bấm số SOS mở thẳng ứng dụng gọi điện",
   "mandatory": false
 }

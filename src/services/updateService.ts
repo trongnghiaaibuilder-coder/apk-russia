@@ -55,8 +55,8 @@ export function setUpdateUrl(url: string): void {
 }
 
 /** Version hiện tại của app (đồng bộ với versionName trong build) */
-export const CURRENT_VERSION_CODE = 17;
-export const CURRENT_VERSION_NAME = '2.11.2';
+export const CURRENT_VERSION_CODE = 18;
+export const CURRENT_VERSION_NAME = '2.12.0';
 
 export const updateService = {
   /** Kiểm tra có bản cập nhật mới không.
@@ -120,13 +120,43 @@ export const updateService = {
     } catch {}
   },
 
-  /** Tải APK cập nhật — mở bằng trình duyệt để tải về và cài đặt */
+  /** Tải và cài đặt APK — dùng native bridge (tự động tải + mở màn hình cài đặt), fallback mở trình duyệt */
   async downloadAndInstall(apkUrl: string): Promise<{ success: boolean; error?: string }> {
+    // Ưu tiên native bridge trên Android — tự động tải qua DownloadManager
+    const updater = (window as any).AndroidUpdater;
+    if (updater && typeof updater.downloadAndInstall === 'function') {
+      return new Promise((resolve) => {
+        let done = false;
+        const finish = (r: { success: boolean; error?: string }) => {
+          if (done) return;
+          done = true;
+          delete (window as any).__onUpdateDownloaded;
+          delete (window as any).__onUpdateError;
+          resolve(r);
+        };
+        (window as any).__onUpdateDownloaded = () => {
+          finish({ success: true });
+        };
+        (window as any).__onUpdateError = (msg: string) => {
+          finish({ success: false, error: msg || 'Tải cập nhật thất bại.' });
+        };
+        try {
+          updater.downloadAndInstall(apkUrl);
+        } catch (err: any) {
+          finish({ success: false, error: 'Không khởi động được quá trình cập nhật.' });
+          return;
+        }
+        // Timeout 10 phút — nếu quá lâu thì báo
+        setTimeout(() => {
+          finish({ success: false, error: 'Tải quá lâu, bạn thử lại nhé.' });
+        }, 10 * 60 * 1000);
+      });
+    }
+
+    // Fallback: mở URL để trình duyệt tải
     try {
-      // Mở URL APK bằng trình duyệt hệ thống — người dùng tải về và bấm cài đặt
       const a = document.createElement('a');
       a.href = apkUrl;
-      a.download = '';
       a.target = '_blank';
       a.rel = 'noopener';
       document.body.appendChild(a);

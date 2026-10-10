@@ -18,6 +18,13 @@ import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.webkit.WebResourceRequest
+import android.app.DownloadManager
+import android.content.BroadcastReceiver
+import android.content.IntentFilter
+import android.net.Uri
+import android.os.Environment
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -132,6 +139,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var webView: WebView
     private lateinit var ttsBridge: TtsBridge
     private lateinit var cameraBridge: CameraBridge
+    private lateinit var updaterBridge: UpdaterBridge
     private val PERMISSION_REQUEST_CODE = 1001
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -148,6 +156,8 @@ class MainActivity : AppCompatActivity() {
         cameraBridge = CameraBridge(this)
         webView.addJavascriptInterface(ttsBridge, "AndroidTTS")
         webView.addJavascriptInterface(cameraBridge, "AndroidCamera")
+        updaterBridge = UpdaterBridge(this)
+        webView.addJavascriptInterface(updaterBridge, "AndroidUpdater")
 
         val settings: WebSettings = webView.settings
         settings.javaScriptEnabled = true
@@ -160,7 +170,22 @@ class MainActivity : AppCompatActivity() {
         settings.mediaPlaybackRequiresUserGesture = false
         settings.cacheMode = WebSettings.LOAD_DEFAULT
 
-        webView.webViewClient = object : WebViewClient() {}
+        webView.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                val url = request?.url?.toString() ?: return false
+                // Mở ứng dụng điện thoại khi bấm số khẩn cấp (SOS)
+                if (url.startsWith("tel:")) {
+                    try {
+                        val intent = Intent(Intent.ACTION_DIAL, Uri.parse(url))
+                        startActivity(intent)
+                    } catch (e: Exception) {
+                        Toast.makeText(this@MainActivity, "Không mở được ứng dụng điện thoại", Toast.LENGTH_SHORT).show()
+                    }
+                    return true
+                }
+                return false
+            }
+        }
 
         webView.webChromeClient = object : WebChromeClient() {
             override fun onPermissionRequest(request: PermissionRequest) {
@@ -229,8 +254,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /** Chạy JS trong WebView từ native bridge khác */
+    fun evaluateJs(script: String) {
+        runOnUiThread {
+            try {
+                webView.evaluateJavascript(script, null)
+            } catch (_: Exception) {}
+        }
+    }
+
     override fun onDestroy() {
         ttsBridge.shutdown()
+        if (::updaterBridge.isInitialized) updaterBridge.onDestroy()
         super.onDestroy()
     }
 
@@ -243,4 +278,87 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+}
+
+/**
+ * Native bridge để tải và cài đặt APK cập nhật — AN TOÀN.
+ * Dùng DownloadManager của hệ thống (không cần FileProvider nên không gây crash khởi động).
+ * JS gọi: AndroidUpdater.downloadAndInstall(apkUrl)
+ * Kết quả trả về qua: window.__onUpdateDownloaded() hoặc window.__onUpdateError(msg)
+ */
+class UpdaterBridge(private val activity: MainActivity) {
+
+    private var downloadId: Long = -1L
+    private var receiver: BroadcastReceiver? = null
+
+    @JavascriptInterface
+    fun downloadAndInstall(apkUrl: String) {
+        activity.runOnUiThread {
+            try {
+                // Hủy receiver cũ nếu có
+                receiver?.let {
+                    try { activity.unregisterReceiver(it) } catch (_: Exception) {}
+                }
+
+                val request = DownloadManager.Request(Uri.parse(apkUrl)).apply {
+                    setTitle("Nước Nga Trong Tầm Tay")
+                    setDescription("Đang tải bản cập nhật...")
+                    setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                    setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "russia-ai-update.apk")
+                    setMimeType("application/vnd.android.package-archive")
+                    setAllowedOverMetered(true)
+                }
+
+                val dm = activity.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+                downloadId = dm.enqueue(request)
+
+                // Lắng nghe khi tải xong
+                receiver = object : BroadcastReceiver() {
+                    override fun onReceive(context: Context?, intent: Intent?) {
+                        val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1) ?: -1
+                        if (id == downloadId) {
+                            try { activity.unregisterReceiver(this) } catch (_: Exception) {}
+                            receiver = null
+                            openDownloadedApk(dm)
+                        }
+                    }
+                }
+                activity.registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+
+            } catch (e: Exception) {
+                postError("Không bắt đầu được quá trình tải: ${e.message}")
+            }
+        }
+    }
+
+    private fun openDownloadedApk(dm: DownloadManager) {
+        try {
+            val uri = dm.getUriForDownloadedFile(downloadId)
+            if (uri == null) {
+                postError("Tải xong nhưng không tìm thấy file.")
+                return
+            }
+            // Mở màn hình cài đặt hệ thống — người dùng bấm "Cài đặt" để cho phép
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                setDataAndType(uri, "application/vnd.android.package-archive")
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION
+            }
+            activity.startActivity(intent)
+            activity.evaluateJs("window.__onUpdateDownloaded && window.__onUpdateDownloaded()")
+        } catch (e: Exception) {
+            postError("Không mở được file cài đặt: ${e.message}")
+        }
+    }
+
+    private fun postError(msg: String) {
+        val escaped = msg.replace("'", "\\'")
+        activity.evaluateJs("window.__onUpdateError && window.__onUpdateError('$escaped')")
+    }
+
+    fun onDestroy() {
+        receiver?.let {
+            try { activity.unregisterReceiver(it) } catch (_: Exception) {}
+        }
+        receiver = null
+    }
 }

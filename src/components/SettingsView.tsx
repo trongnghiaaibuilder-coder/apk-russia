@@ -198,7 +198,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ isOnline }) => {
               )}
             </div>
             <p className="text-[11px] v2-text-faint leading-relaxed">
-              Bấm sẽ mở trình duyệt để tải file APK — tải xong bạn mở file để cài đặt.
+              Bấm để app tự tải bản mới — tải xong điện thoại sẽ hỏi bạn cho phép cài đặt.
             </p>
           </div>
         )}
