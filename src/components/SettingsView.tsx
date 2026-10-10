@@ -16,6 +16,8 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ isOnline }) => {
   const [groqKey, setGroqKey] = useState(appSettings.getGroqApiKey());
   const [showGroqKey, setShowGroqKey] = useState(false);
   const [groqSaved, setGroqSaved] = useState(false);
+  const [testingGroq, setTestingGroq] = useState(false);
+  const [groqTestResult, setGroqTestResult] = useState<string | null>(null);
   const [checkingUpdate, setCheckingUpdate] = useState(false);
   const [updateInfo, setUpdateInfo] = useState<UpdateInfo | null>(null);
   const [updateError, setUpdateError] = useState<string | null>(null);
@@ -31,6 +33,36 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ isOnline }) => {
     appSettings.setGroqApiKey(groqKey);
     setGroqSaved(true);
     setTimeout(() => setGroqSaved(false), 3000);
+  };
+  const handleTestGroqKey = async () => {
+    const key = groqKey.trim() || appSettings.getGroqApiKey();
+    if (!key) {
+      setGroqTestResult('Bạn chưa nhập key.');
+      return;
+    }
+    setTestingGroq(true);
+    setGroqTestResult(null);
+    try {
+      const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${key}` },
+        body: JSON.stringify({
+          model: 'llama-3.3-70b-versatile',
+          messages: [{ role: 'user', content: 'Chào' }],
+          max_tokens: 10,
+        }),
+      });
+      if (res.ok) {
+        setGroqTestResult('Key hoạt động tốt! Trợ lý sẽ dùng Groq.');
+      } else if (res.status === 401) {
+        setGroqTestResult('Key không đúng. Bạn kiểm tra lại nhé.');
+      } else {
+        setGroqTestResult(`Lỗi ${res.status}. Thử lại sau nhé.`);
+      }
+    } catch {
+      setGroqTestResult('Không kết nối được. Kiểm tra mạng nhé.');
+    }
+    setTestingGroq(false);
   };
 
   const handleCheckUpdate = async () => {
@@ -157,9 +189,19 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ isOnline }) => {
           >
             Lưu
           </button>
+          <button
+            onClick={handleTestGroqKey}
+            disabled={testingGroq}
+            className="px-4 py-2.5 rounded-2xl v2-card v2-text text-[13px] font-bold active:scale-95 transition-transform cursor-pointer disabled:opacity-50"
+          >
+            {testingGroq ? '...' : 'Kiểm tra'}
+          </button>
         </div>
         {groqSaved && (
           <p className="text-[12px] text-emerald-300 mt-2">Đã lưu! Trợ lý sẽ ưu tiên dùng Groq.</p>
+        )}
+        {groqTestResult && (
+          <p className="text-[12px] v2-text-muted mt-2">{groqTestResult}</p>
         )}
         <p className="text-[11px] v2-text-faint mt-2 leading-relaxed">
           Lấy key miễn phí tại console.groq.com → API Keys → Create. Không có key, app vẫn dùng tri thức ngoại tuyến.

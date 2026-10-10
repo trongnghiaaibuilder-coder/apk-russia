@@ -99,7 +99,24 @@ export class GroqAssistantProvider implements IAIAssistantProvider {
       if (!response.ok) {
         const errText = await response.text().catch(() => '');
         logger.warn('GroqAssistantProvider', `API error ${response.status}: ${errText.slice(0, 200)}`);
-        // Key sai hoặc hết quota → fallback offline
+        // Key sai (401) hoặc hết quota → báo lỗi rõ ràng
+        if (response.status === 401) {
+          return {
+            success: false,
+            durationMs: Date.now() - startTime,
+            errorCode: 'PROVIDER_ERROR',
+            error: 'Groq API key không đúng. Bạn kiểm tra lại key tại console.groq.com nhé.'
+          };
+        }
+        if (response.status === 429) {
+          return {
+            success: false,
+            durationMs: Date.now() - startTime,
+            errorCode: 'PROVIDER_ERROR',
+            error: 'Bạn hỏi quá nhanh, đợi một chút rồi thử lại nhé.'
+          };
+        }
+        // Lỗi khác → fallback offline
         const fallbackResp = await localKnowledgeProvider.sendMessage(messages, context);
         return { ...fallbackResp, durationMs: Date.now() - startTime };
       }
@@ -108,8 +125,12 @@ export class GroqAssistantProvider implements IAIAssistantProvider {
       const text = data?.choices?.[0]?.message?.content?.trim();
 
       if (!text) {
-        const fallbackResp = await localKnowledgeProvider.sendMessage(messages, context);
-        return { ...fallbackResp, durationMs: Date.now() - startTime };
+        return {
+          success: false,
+          durationMs: Date.now() - startTime,
+          errorCode: 'PROVIDER_ERROR',
+          error: 'Groq không trả về kết quả. Bạn thử lại nhé.'
+        };
       }
 
       return {

@@ -32,7 +32,7 @@ export interface AssistantResponse {
   success: boolean;
   message?: AssistantMessage;
   error?: string;
-  errorCode?: 'EMPTY_PROMPT' | 'PROMPT_TOO_LONG' | 'NETWORK_ERROR' | 'TIMEOUT' | 'PROVIDER_ERROR' | 'INVALID_RESPONSE';
+  errorCode?: 'EMPTY_PROMPT' | 'PROMPT_TOO_LONG' | 'NETWORK_ERROR' | 'TIMEOUT' | 'PROVIDER_ERROR' | 'INVALID_RESPONSE' | 'INVALID_API_KEY' | 'RATE_LIMITED' | 'EMPTY_RESPONSE';
   durationMs: number;
 }
 
