@@ -1,7 +1,7 @@
 {
-  "versionCode": 25,
-  "versionName": "2.14.4",
-  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.14.4/russia-ai-support-v2.14.4.apk",
-  "releaseNotes": "Cập nhật model Groq mới (model cũ đã bị Groq ngừng)",
+  "versionCode": 26,
+  "versionName": "2.15.0",
+  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.15.0/russia-ai-support-v2.15.0.apk",
+  "releaseNotes": "Icon mới (sao vàng, cờ Nga trên nền đỏ). Nút tải bản mới mở trực tiếp link APK.",
   "mandatory": false
 }

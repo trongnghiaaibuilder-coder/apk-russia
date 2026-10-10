@@ -81,16 +81,15 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ isOnline }) => {
     }
   };
 
-  const handleDownloadUpdate = async () => {
+  const handleDownloadUpdate = () => {
     if (!updateInfo) return;
-    setDownloading(true);
-    setUpdateError(null);
-    const result = await updateService.downloadAndInstall(updateInfo.apkUrl);
-    setDownloading(false);
-    if (!result.success) {
-      setUpdateError(result.error || 'Tải cập nhật thất bại.');
+    // Mở trực tiếp link tải APK bằng trình duyệt
+    const updater = (window as any).AndroidUpdater;
+    if (updater && typeof updater.openInBrowser === 'function') {
+      updater.openInBrowser(updateInfo.apkUrl);
+    } else {
+      window.open(updateInfo.apkUrl, '_blank');
     }
-    // Nếu thành công, native đã mở màn hình cài đặt
   };
 
   const handleSkipUpdate = () => {
@@ -271,14 +270,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ isOnline }) => {
             <div className="flex gap-2 pt-1">
               <button
                 onClick={handleDownloadUpdate}
-                disabled={downloading}
-                className="flex-1 py-2.5 rounded-2xl v2-accent-bg text-[13px] font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform cursor-pointer disabled:opacity-50"
+                className="flex-1 py-2.5 rounded-2xl v2-accent-bg text-[13px] font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform cursor-pointer"
               >
-                {downloading ? (
-                  <><RefreshCw className="w-4 h-4 animate-spin" /><span>Đang tải...</span></>
-                ) : (
-                  <><Download className="w-4 h-4" /><span>Tải bản mới</span></>
-                )}
+                <Download className="w-4 h-4" /><span>Tải bản mới</span>
               </button>
               {!updateInfo.mandatory && (
                 <button
@@ -290,7 +284,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ isOnline }) => {
               )}
             </div>
             <p className="text-[11px] v2-text-faint leading-relaxed">
-              Bấm để app tự tải bản mới — tải xong điện thoại sẽ hỏi bạn cho phép cài đặt.
+              Bấm để mở link tải file APK — tải xong bạn mở file để cài đặt.
             </p>
           </div>
         )}

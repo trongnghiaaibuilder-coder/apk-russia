@@ -55,8 +55,8 @@ export function setUpdateUrl(url: string): void {
 }
 
 /** Version hiện tại của app (đồng bộ với versionName trong build) */
-export const CURRENT_VERSION_CODE = 25;
-export const CURRENT_VERSION_NAME = '2.14.4';
+export const CURRENT_VERSION_CODE = 26;
+export const CURRENT_VERSION_NAME = '2.15.0';
 
 export const updateService = {
   /** Kiểm tra có bản cập nhật mới không.
