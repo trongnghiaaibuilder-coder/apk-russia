@@ -30,7 +30,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ isOnline }) => {
     setUpdateError(null);
     setUpdateInfo(null);
     setIsUpToDate(false);
-    const result = await updateService.checkForUpdate();
+    const result = await updateService.checkForUpdate(true); // Bỏ qua trạng thái đã ẩn khi kiểm tra thủ công
     setCheckingUpdate(false);
     if (result.hasUpdate && result.updateInfo) {
       setUpdateInfo(result.updateInfo);

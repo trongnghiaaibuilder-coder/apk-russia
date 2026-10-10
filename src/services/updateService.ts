@@ -55,12 +55,14 @@ export function setUpdateUrl(url: string): void {
 }
 
 /** Version hiện tại của app (đồng bộ với versionName trong build) */
-export const CURRENT_VERSION_CODE = 15;
-export const CURRENT_VERSION_NAME = '2.11.0';
+export const CURRENT_VERSION_CODE = 16;
+export const CURRENT_VERSION_NAME = '2.11.1';
 
 export const updateService = {
-  /** Kiểm tra có bản cập nhật mới không */
-  async checkForUpdate(): Promise<UpdateCheckResult> {
+  /** Kiểm tra có bản cập nhật mới không.
+   * @param ignoreSkip - true khi người dùng bấm "Kiểm tra" thủ công (bỏ qua trạng thái đã ẩn)
+   */
+  async checkForUpdate(ignoreSkip = false): Promise<UpdateCheckResult> {
     const current = {
       hasUpdate: false,
       currentVersion: CURRENT_VERSION_NAME,
@@ -94,7 +96,8 @@ export const updateService = {
         skipped = parseInt(localStorage.getItem(SKIP_VERSION_KEY) || '0', 10);
       } catch {}
 
-      if (info.versionCode > CURRENT_VERSION_CODE && info.versionCode !== skipped) {
+      const isSkipped = !ignoreSkip && info.versionCode === skipped;
+      if (info.versionCode > CURRENT_VERSION_CODE && !isSkipped) {
         try {
           localStorage.setItem(LAST_CHECK_KEY, new Date().toISOString());
         } catch {}

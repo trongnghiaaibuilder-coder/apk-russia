@@ -1,7 +1,7 @@
 {
-  "versionCode": 15,
-  "versionName": "2.11.0",
-  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.11.0/russia-ai-support-v2.11.0.apk",
-  "releaseNotes": "Thêm nút phát âm trong phần Dịch; thêm hướng dẫn sử dụng cho lần đầu mở app",
+  "versionCode": 16,
+  "versionName": "2.11.1",
+  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.11.1/russia-ai-support-v2.11.1.apk",
+  "releaseNotes": "Sửa lỗi nút Kiểm tra không hiện bản mới khi đã bấm Để sau",
   "mandatory": false
 }
