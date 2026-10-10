@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Copy, Check, AlertCircle } from 'lucide-react';
+import { Copy, Check, AlertCircle, Volume2, VolumeX } from 'lucide-react';
 import { Card } from '../../../components/ui/Card';
 import { TranslationResult } from '../types';
 import { transliterateRussian, containsCyrillic } from '../../../services/transliterationService';
+import { textToSpeechService } from '../../voice/services/textToSpeechService';
 
 interface TranslationResultCardProps {
   result: TranslationResult | null;
@@ -15,6 +16,7 @@ export const TranslationResultCard: React.FC<TranslationResultCardProps> = ({
 }) => {
   const [copied, setCopied] = useState(false);
   const [copyFeedback, setCopyFeedback] = useState<string | null>(null);
+  const [speaking, setSpeaking] = useState(false);
 
   const handleCopy = async () => {
     if (!result?.translatedText) return;
@@ -34,6 +36,27 @@ export const TranslationResultCard: React.FC<TranslationResultCardProps> = ({
     } catch {
       setCopyFeedback('Không thể sao chép.');
       setTimeout(() => setCopyFeedback(null), 3000);
+    }
+  };
+
+  const handleSpeak = async () => {
+    if (!result?.translatedText) return;
+    if (speaking) {
+      textToSpeechService.stop();
+      setSpeaking(false);
+      return;
+    }
+    setSpeaking(true);
+    try {
+      await textToSpeechService.speak(
+        result.translatedText,
+        result.targetLanguage,
+        undefined,
+        () => setSpeaking(false),
+        () => setSpeaking(false)
+      );
+    } catch {
+      setSpeaking(false);
     }
   };
 
@@ -77,20 +100,37 @@ export const TranslationResultCard: React.FC<TranslationResultCardProps> = ({
           )}
         </div>
 
-        <button
-          type="button"
-          onClick={handleCopy}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer ${
-            copied
-              ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-              : 'bg-slate-800 hover:bg-slate-750 v2-text-muted hover:opacity-70'
-          }`}
-          aria-label="Sao chép kết quả"
-          title="Sao chép kết quả"
-        >
-          {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-          <span>{copied ? 'Đã sao chép' : 'Sao chép'}</span>
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={handleSpeak}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer ${
+              speaking
+                ? 'bg-sky-500/20 text-sky-300 border border-sky-500/30'
+                : 'bg-slate-800 hover:bg-slate-750 v2-text-muted hover:opacity-70'
+            }`}
+            aria-label={speaking ? 'Dừng phát âm' : 'Phát âm kết quả'}
+            title={speaking ? 'Dừng phát âm' : 'Nghe phát âm'}
+          >
+            {speaking ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+            <span>{speaking ? 'Đang đọc...' : 'Nghe đọc'}</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={handleCopy}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition-all cursor-pointer ${
+              copied
+                ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                : 'bg-slate-800 hover:bg-slate-750 v2-text-muted hover:opacity-70'
+            }`}
+            aria-label="Sao chép kết quả"
+            title="Sao chép kết quả"
+          >
+            {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+            <span>{copied ? 'Đã sao chép' : 'Sao chép'}</span>
+          </button>
+        </div>
       </div>
 
       <div className="py-1">

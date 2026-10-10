@@ -30,6 +30,7 @@ import { RealLifeModule } from './modules/reallife';
 import { SettingsView } from './components/SettingsView';
 import { safeStorage } from './services/storage';
 import { updateService, UpdateInfo } from './services/updateService';
+import { Onboarding, ONBOARDING_KEY } from './components/Onboarding';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState<TabId>('home');
@@ -37,6 +38,21 @@ export default function App() {
   const [prefilledTranslateText, setPrefilledTranslateText] = useState<string>('');
   const isOnline = useOnlineStatus();
   const [pendingUpdate, setPendingUpdate] = useState<UpdateInfo | null>(null);
+  // Hiện hướng dẫn nếu chưa từng hoàn thành
+  const [showOnboarding, setShowOnboarding] = useState<boolean>(() => {
+    try {
+      return safeStorage.getItem<string>(ONBOARDING_KEY, '') !== 'done';
+    } catch {
+      return true;
+    }
+  });
+
+  const handleOnboardingComplete = () => {
+    try {
+      safeStorage.setItem(ONBOARDING_KEY, 'done');
+    } catch {}
+    setShowOnboarding(false);
+  };
 
   // Tự động kiểm tra cập nhật mỗi khi mở app (tối đa 1 lần/ngày)
   // Bọc try/catch kỹ để không bao giờ làm crash app
@@ -196,6 +212,9 @@ export default function App() {
 
   return (
     <ErrorBoundary>
+      {/* Hướng dẫn lần đầu mở app */}
+      {showOnboarding && <Onboarding onComplete={handleOnboardingComplete} />}
+
       {/* Banner cập nhật tự động */}
       {pendingUpdate && (
         <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-2 pointer-events-none">

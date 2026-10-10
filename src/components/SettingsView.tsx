@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Wifi, WifiOff, Trash2, Info, ChevronRight, KeyRound, Eye, EyeOff, RefreshCw, Download, CheckCircle2 } from 'lucide-react';
+import { Wifi, WifiOff, Trash2, Info, ChevronRight, KeyRound, Eye, EyeOff, RefreshCw, Download, CheckCircle2, BookOpen } from 'lucide-react';
 import { updateService, UpdateInfo, CURRENT_VERSION_NAME } from '../services/updateService';
 import { safeStorage } from '../services/storage';
 import { appSettings } from '../services/appSettings';
+import { ONBOARDING_KEY } from './Onboarding';
 
 interface SettingsViewProps {
   isOnline: boolean;
@@ -228,6 +229,26 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ isOnline }) => {
 
       {/* About */}
       <div className="v2-fade-up v2-fade-up-4 rounded-3xl v2-card p-4">
+        <button
+          onClick={() => {
+            try {
+              safeStorage.removeItem(ONBOARDING_KEY);
+            } catch {}
+            window.location.reload();
+          }}
+          className="w-full flex items-center justify-between hover:opacity-80 active:opacity-60 transition-opacity cursor-pointer mb-3"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl v2-accent-soft v2-accent-text flex items-center justify-center">
+              <BookOpen className="w-5 h-5" />
+            </div>
+            <div className="text-left">
+              <div className="text-[14px] font-semibold v2-text">Xem lại hướng dẫn sử dụng</div>
+              <div className="text-[12px] v2-text-faint">Hướng dẫn từng tính năng của app</div>
+            </div>
+          </div>
+          <ChevronRight className="w-4 h-4 v2-text-faint" />
+        </button>
         <div className="flex items-center gap-3 mb-3">
           <div className="w-10 h-10 rounded-2xl bg-blue-500/15 text-blue-300 flex items-center justify-center">
             <Info className="w-5 h-5" />
