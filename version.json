@@ -1,7 +1,7 @@
 {
-  "versionCode": 18,
-  "versionName": "2.12.0",
-  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.12.0/russia-ai-support-v2.12.0.apk",
-  "releaseNotes": "Tự động tải và cài đặt khi cập nhật; bấm số SOS mở thẳng ứng dụng gọi điện",
+  "versionCode": 19,
+  "versionName": "2.13.0",
+  "apkUrl": "https://github.com/trongnghiaaibuilder-coder/apk-russia/releases/download/v2.13.0/russia-ai-support-v2.13.0.apk",
+  "releaseNotes": "Thêm Bản đồ & Chỉ đường (Yandex Maps), Đổi tiền VND-RUB, Câu yêu thích",
   "mandatory": false
 }

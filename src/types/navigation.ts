@@ -2,7 +2,7 @@
  * Navigation types for Russia AI Support
  * Developer credit: Xương Rồng AI developer
  */
-export type TabId = 'home' | 'learn' | 'translate' | 'voice' | 'camera' | 'assistant' | 'emergency' | 'settings';
+export type TabId = 'home' | 'learn' | 'translate' | 'voice' | 'camera' | 'assistant' | 'emergency' | 'settings' | 'maps' | 'currency';
 
 export interface NavItemConfig {
   id: TabId;

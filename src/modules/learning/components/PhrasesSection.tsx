@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { Search, ShieldAlert, Info, Volume2 } from 'lucide-react';
+import { Search, ShieldAlert, Info, Volume2, Star } from 'lucide-react';
 import { Card } from '../../../components/ui/Card';
 import { RUSSIAN_PHRASES } from '../data/phrases';
 import { textToSpeechService } from '../../voice/services/textToSpeechService';
+import { getFavorites, toggleFavorite, phraseId } from '../../../services/favoritesService';
 
 export const PhrasesSection: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [speakingId, setSpeakingId] = useState<string | null>(null);
+  const [favorites, setFavorites] = useState<string[]>(() => getFavorites());
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
   const categories = ['All', ...Array.from(new Set(RUSSIAN_PHRASES.map((p) => p.category)))];
 
@@ -24,6 +27,7 @@ export const PhrasesSection: React.FC = () => {
 
   const filteredPhrases = RUSSIAN_PHRASES.filter((item) => {
     const matchesCategory = selectedCategory === 'All' || item.category === selectedCategory;
+    const matchesFavorite = !showFavoritesOnly || favorites.includes(phraseId(item.vi, item.ru));
     const query = searchQuery.trim().toLowerCase();
     const matchesSearch =
       !query ||
@@ -31,7 +35,7 @@ export const PhrasesSection: React.FC = () => {
       item.vi.toLowerCase().includes(query) ||
       item.pronunciation.toLowerCase().includes(query) ||
       item.situation.toLowerCase().includes(query);
-    return matchesCategory && matchesSearch;
+    return matchesCategory && matchesSearch && matchesFavorite;
   });
 
   return (
@@ -56,6 +60,17 @@ export const PhrasesSection: React.FC = () => {
       </div>
 
       <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+        <button
+          onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
+          className={`min-h-[38px] px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-colors cursor-pointer flex items-center gap-1.5 ${
+            showFavoritesOnly
+              ? 'v2-accent-bg font-semibold shadow-sm shadow-rose-950/40'
+              : 'v2-bg-soft border v2-divider v2-text-muted hover:bg-slate-800'
+          }`}
+        >
+          <Star className={`w-3.5 h-3.5 ${showFavoritesOnly ? 'fill-current' : ''}`} />
+          Yêu thích ({favorites.length})
+        </button>
         {categories.map((cat) => {
           const isSelected = selectedCategory === cat;
           return (
@@ -104,6 +119,22 @@ export const PhrasesSection: React.FC = () => {
                       <span>Khẩn cấp</span>
                     </span>
                   )}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const nowFav = toggleFavorite(phrase.vi, phrase.ru);
+                      setFavorites(nowFav ? [...favorites, phraseId(phrase.vi, phrase.ru)] : favorites.filter(f => f !== phraseId(phrase.vi, phrase.ru)));
+                    }}
+                    className={`min-h-[40px] min-w-[40px] rounded-xl flex items-center justify-center transition-all cursor-pointer active:scale-95 ${
+                      favorites.includes(phraseId(phrase.vi, phrase.ru))
+                        ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                        : 'v2-bg-soft border v2-divider v2-text-muted hover:opacity-70'
+                    }`}
+                    title="Lưu vào yêu thích"
+                    aria-label="Lưu vào yêu thích"
+                  >
+                    <Star className={`w-4 h-4 ${favorites.includes(phraseId(phrase.vi, phrase.ru)) ? 'fill-current' : ''}`} />
+                  </button>
                   <button
                     type="button"
                     onClick={() => handleSpeak(phrase.ru, phrase.id)}

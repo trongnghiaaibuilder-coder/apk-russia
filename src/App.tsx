@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import {
+import { Map as MapIcon, Banknote,
   BookOpen,
   Languages,
   Mic,
@@ -31,6 +31,8 @@ import { SettingsView } from './components/SettingsView';
 import { safeStorage } from './services/storage';
 import { updateService, UpdateInfo } from './services/updateService';
 import { Onboarding, ONBOARDING_KEY } from './components/Onboarding';
+import { MapsView } from './modules/maps/components/MapsView';
+import { CurrencyConverter } from './modules/currency/components/CurrencyConverter';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState<TabId>('home');
@@ -127,6 +129,22 @@ export default function App() {
       desc: 'Số cứu nạn & mẫu câu',
       gradient: 'from-rose-600 to-red-700',
       glow: 'shadow-rose-950/40',
+    },
+    {
+      id: 'maps' as TabId,
+      icon: <MapIcon className="w-6 h-6" />,
+      title: 'Bản đồ',
+      desc: 'Chỉ đường & địa điểm',
+      gradient: 'from-sky-500 to-cyan-600',
+      glow: 'shadow-sky-950/40',
+    },
+    {
+      id: 'currency' as TabId,
+      icon: <Banknote className="w-6 h-6" />,
+      title: 'Đổi tiền',
+      desc: 'VND ↔ RUB nhanh',
+      gradient: 'from-emerald-500 to-green-600',
+      glow: 'shadow-emerald-950/40',
     },
   ];
 
@@ -267,6 +285,13 @@ export default function App() {
         {currentTab === 'assistant' && <AssistantModule />}
         {currentTab === 'emergency' && <RealLifeModule />}
         {currentTab === 'settings' && <SettingsView isOnline={isOnline} />}
+        {currentTab === 'maps' && <MapsView />}
+        {currentTab === 'currency' && (
+          <div className="space-y-4">
+            <h2 className="text-xl font-bold v2-text">Đổi tiền</h2>
+            <CurrencyConverter />
+          </div>
+        )}
       </AppShell>
 
       {/* Info modal */}
