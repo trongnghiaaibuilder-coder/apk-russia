@@ -16,6 +16,7 @@ export const CameraViewfinder: React.FC<CameraViewfinderProps> = ({
   isProcessing
 }) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const galleryInputRef = useRef<HTMLInputElement | null>(null);
   const [cameraStatus, setCameraStatus] = useState<CameraStatus>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
