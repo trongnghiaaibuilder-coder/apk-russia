@@ -15,6 +15,7 @@ import android.speech.tts.UtteranceProgressListener
 import android.util.Base64
 import android.webkit.JavascriptInterface
 import android.webkit.PermissionRequest
+import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -141,6 +142,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var ttsBridge: TtsBridge
     private lateinit var cameraBridge: CameraBridge
     private lateinit var updaterBridge: UpdaterBridge
+    private lateinit var storageBridge: StorageBridge
+    private var filePathCallback: ValueCallback<Array<Uri>>? = null
+    companion object {
+        private const val REQUEST_FILE_CHOOSER = 1001
+    }
     private val PERMISSION_REQUEST_CODE = 1001
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -157,6 +163,8 @@ class MainActivity : AppCompatActivity() {
         cameraBridge = CameraBridge(this)
         webView.addJavascriptInterface(ttsBridge, "AndroidTTS")
         webView.addJavascriptInterface(cameraBridge, "AndroidCamera")
+        storageBridge = StorageBridge(this)
+        webView.addJavascriptInterface(storageBridge, "AndroidStorage")
         updaterBridge = UpdaterBridge(this)
         webView.addJavascriptInterface(updaterBridge, "AndroidUpdater")
 
@@ -195,6 +203,27 @@ class MainActivity : AppCompatActivity() {
                     request.grant(request.resources)
                 }
             }
+
+            override fun onShowFileChooser(
+                webView: WebView?,
+                filePathCallback: ValueCallback<Array<Uri>>?,
+                fileChooserParams: FileChooserParams?
+            ): Boolean {
+                this@MainActivity.filePathCallback?.onReceiveValue(null)
+                this@MainActivity.filePathCallback = filePathCallback
+                try {
+                    val intent = fileChooserParams?.createIntent()
+                        ?: Intent(Intent.ACTION_GET_CONTENT).apply {
+                            addCategory(Intent.CATEGORY_OPENABLE)
+                            type = "image/*"
+                        }
+                    startActivityForResult(intent, REQUEST_FILE_CHOOSER)
+                } catch (e: Exception) {
+                    this@MainActivity.filePathCallback = null
+                    return false
+                }
+                return true
+            }
         }
 
         // Load offline packaged application or local asset
@@ -204,6 +233,15 @@ class MainActivity : AppCompatActivity() {
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_FILE_CHOOSER) {
+            val result = if (resultCode == Activity.RESULT_OK) {
+                val uri = data?.data
+                if (uri != null) arrayOf(uri) else null
+            } else null
+            filePathCallback?.onReceiveValue(result)
+            filePathCallback = null
+            return
+        }
         if (requestCode == CameraBridge.REQUEST_CAPTURE) {
             if (resultCode == Activity.RESULT_OK) {
                 try {
@@ -385,5 +423,41 @@ class UpdaterBridge(private val activity: MainActivity) {
             try { activity.unregisterReceiver(it) } catch (_: Exception) {}
         }
         receiver = null
+    }
+}
+
+/**
+ * Native storage dùng SharedPreferences — riêng cho từng máy,
+ * không bị xóa khi WebView clear cache. Dữ liệu mỗi thiết bị tách biệt.
+ */
+class StorageBridge(private val activity: MainActivity) {
+    private val prefs by lazy {
+        activity.getSharedPreferences("russia_ai_private_storage", Context.MODE_PRIVATE)
+    }
+
+    @JavascriptInterface
+    fun isAvailable(): Boolean = true
+
+    @JavascriptInterface
+    fun getItem(key: String): String? {
+        return try {
+            prefs.getString(key, null)
+        } catch (_: Exception) { null }
+    }
+
+    @JavascriptInterface
+    fun setItem(key: String, value: String): Boolean {
+        return try {
+            prefs.edit().putString(key, value).apply()
+            true
+        } catch (_: Exception) { false }
+    }
+
+    @JavascriptInterface
+    fun removeItem(key: String): Boolean {
+        return try {
+            prefs.edit().remove(key).apply()
+            true
+        } catch (_: Exception) { false }
     }
 }

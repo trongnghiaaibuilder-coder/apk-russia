@@ -55,13 +55,21 @@ export const CameraViewfinder: React.FC<CameraViewfinderProps> = ({
 
   return (
     <div className="w-full">
-      {/* Hidden file input */}
+      {/* Hidden file input - camera */}
       <input
         type="file"
         ref={fileInputRef}
         onChange={handleFileChange}
         accept="image/*"
         capture="environment"
+        className="hidden"
+      />
+      {/* Hidden file input - thư viện ảnh */}
+      <input
+        type="file"
+        ref={galleryInputRef}
+        onChange={handleFileChange}
+        accept="image/*"
         className="hidden"
       />
 
@@ -106,7 +114,7 @@ export const CameraViewfinder: React.FC<CameraViewfinderProps> = ({
 
         <div className="flex gap-2 mt-3">
           <button
-            onClick={() => fileInputRef.current?.click()}
+            onClick={() => galleryInputRef.current?.click()}
             className="flex-1 py-3 rounded-2xl v2-accent-soft v2-accent-text text-[13px] font-semibold flex items-center justify-center gap-2 active:scale-[0.98] transition-transform cursor-pointer"
           >
             <ImageIcon className="w-4 h-4" />
