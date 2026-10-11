@@ -143,6 +143,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cameraBridge: CameraBridge
     private lateinit var updaterBridge: UpdaterBridge
     private lateinit var storageBridge: StorageBridge
+    private lateinit var ocrBridge: OcrBridge
     private var filePathCallback: ValueCallback<Array<Uri>>? = null
     companion object {
         private const val REQUEST_FILE_CHOOSER = 1001
@@ -165,6 +166,8 @@ class MainActivity : AppCompatActivity() {
         webView.addJavascriptInterface(cameraBridge, "AndroidCamera")
         storageBridge = StorageBridge(this)
         webView.addJavascriptInterface(storageBridge, "AndroidStorage")
+        ocrBridge = OcrBridge(this)
+        webView.addJavascriptInterface(ocrBridge, "AndroidOCR")
         updaterBridge = UpdaterBridge(this)
         webView.addJavascriptInterface(updaterBridge, "AndroidUpdater")
 

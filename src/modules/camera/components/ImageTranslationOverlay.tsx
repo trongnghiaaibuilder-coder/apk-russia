@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Loader2, AlertCircle, Languages, RotateCcw, X } from 'lucide-react';
 import { realOcrService, OcrLine } from '../services/realOcrService';
+import { recognizeWithNativeOcr, hasNativeOcr } from '../services/nativeOcrService';
 import { translationService } from '../../translator/services/translationService';
 import { transliterateRussian, containsCyrillic } from '../../../services/transliterationService';
 
@@ -37,9 +38,29 @@ export const ImageTranslationOverlay: React.FC<ImageTranslationOverlayProps> = (
 
     async function process() {
       // Bước 1: OCR đọc chữ Nga + vị trí
+      // Ưu tiên OCR native (Tesseract trên Android, có tiền xử lý ảnh) — ổn định hơn
       setStage('ocr');
       setStatusText('Đang đọc chữ trong ảnh...');
-      const ocrResult = await realOcrService.recognizeFromCanvas(canvas);
+      let ocrResult;
+      if (hasNativeOcr()) {
+        try {
+          setStatusText('Đang đọc chữ bằng AI trên máy...');
+          const nativeResult = await recognizeWithNativeOcr(canvas);
+          if (cancelled) return;
+          if (nativeResult.success && nativeResult.lines.length > 0) {
+            ocrResult = { success: true, lines: nativeResult.lines };
+          } else {
+            // Native không đọc được → thử Tesseract.js
+            setStatusText('Đang thử cách đọc khác...');
+            ocrResult = await realOcrService.recognizeFromCanvas(canvas);
+          }
+        } catch {
+          // Lỗi native → fallback Tesseract.js
+          ocrResult = await realOcrService.recognizeFromCanvas(canvas);
+        }
+      } else {
+        ocrResult = await realOcrService.recognizeFromCanvas(canvas);
+      }
       if (cancelled) return;
 
       if (!ocrResult.success || ocrResult.lines.length === 0) {
