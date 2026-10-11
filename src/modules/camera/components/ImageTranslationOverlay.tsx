@@ -48,28 +48,34 @@ export const ImageTranslationOverlay: React.FC<ImageTranslationOverlayProps> = (
         return;
       }
 
-      // Bước 2: Dịch từng dòng sang tiếng Việt
+      // Bước 2: Dịch gộp tất cả dòng bằng Google Dịch (1 lần gọi — nhanh như Google Lens)
       setStage('translating');
-      setStatusText(`Đang dịch ${ocrResult.lines.length} dòng...`);
+      setStatusText('Đang dịch bằng Google Dịch...');
       const translated: TranslatedLine[] = [];
-      for (let i = 0; i < ocrResult.lines.length; i++) {
-        const line = ocrResult.lines[i];
-        setStatusText(`Đang dịch dòng ${i + 1}/${ocrResult.lines.length}...`);
-        try {
-          const res = await translationService.translate({
-            text: line.text,
-            sourceLang: 'ru',
-            targetLang: 'vi',
-          });
+      try {
+        const SEP = '\n';
+        const joined = ocrResult.lines.map((l) => l.text).join(SEP);
+        const res = await translationService.translate({
+          text: joined,
+          sourceLang: 'ru',
+          targetLang: 'vi',
+        });
+        let viLines: string[] = [];
+        if (res.success && res.result) {
+          viLines = res.result.translatedText.split('\n');
+        }
+        ocrResult.lines.forEach((line, i) => {
           translated.push({
             ...line,
-            translatedText: res.success && res.result ? res.result.translatedText : line.text,
+            translatedText: (viLines[i] || '').trim() || line.text,
           });
-        } catch {
+        });
+      } catch {
+        ocrResult.lines.forEach((line) => {
           translated.push({ ...line, translatedText: line.text });
-        }
-        if (cancelled) return;
+        });
       }
+      if (cancelled) return;
 
       setTranslatedLines(translated);
       setStage('done');
