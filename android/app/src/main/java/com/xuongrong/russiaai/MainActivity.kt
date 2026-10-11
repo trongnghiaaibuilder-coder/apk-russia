@@ -357,6 +357,24 @@ class UpdaterBridge(private val activity: MainActivity) {
         }
     }
 
+    /** Mở URL bằng trình duyệt ngoài */
+    @JavascriptInterface
+    fun openInBrowser(url: String) {
+        activity.runOnUiThread {
+            try {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                }
+                activity.startActivity(intent)
+            } catch (e: Exception) {
+                postError("Không mở được trình duyệt: ${e.message}")
+            }
+        }
+    }
+
+    @JavascriptInterface
+    fun isAvailable(): Boolean = true
+
     private fun postError(msg: String) {
         val escaped = msg.replace("'", "\\'")
         activity.evaluateJs("window.__onUpdateError && window.__onUpdateError('$escaped')")

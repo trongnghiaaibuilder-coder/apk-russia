@@ -20,9 +20,11 @@ const STORAGE_KEY_MESSAGES = 'russia_ai_assistant_history_v1';
 
 export class AssistantService {
   private provider: IAIAssistantProvider = geminiAssistantProvider;
+  private manualProviderOverride = false;
 
   /** Chọn provider: ưu tiên Groq (miễn phí, nhanh), sau đó Gemini, cuối cùng offline */
   refreshProvider(): void {
+    if (this.manualProviderOverride) return;
     if (appSettings.hasGroqApiKey()) {
       this.provider = groqAssistantProvider;
     } else {
@@ -89,6 +91,12 @@ Hãy chọn một chủ đề gợi ý bên dưới hoặc đặt câu hỏi b�
 
   setProvider(provider: IAIAssistantProvider): void {
     this.provider = provider;
+    this.manualProviderOverride = true;
+  }
+
+  /** Xóa ghi đè thủ công, cho phép tự chọn provider theo key */
+  clearProviderOverride(): void {
+    this.manualProviderOverride = false;
   }
 
   getProvider(): IAIAssistantProvider {

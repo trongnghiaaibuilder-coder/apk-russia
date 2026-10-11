@@ -26,7 +26,12 @@ export const MapsView: React.FC = () => {
   const openMaps = (place: KeyPlace, useGoogle = false) => {
     const query = `${place.nameRu}, ${place.addressRu}`;
     const url = useGoogle ? googleMapsUrl(query) : yandexMapsUrl(query);
-    window.open(url, '_blank', 'noopener');
+    const updater = (window as any).AndroidUpdater;
+    if (updater && typeof updater.openInBrowser === 'function') {
+      updater.openInBrowser(url);
+    } else {
+      window.open(url, '_blank', 'noopener');
+    }
   };
 
   return (

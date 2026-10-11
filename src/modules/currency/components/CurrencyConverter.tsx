@@ -4,7 +4,7 @@
  * Developer: Xương Rồng AI Developer
  */
 import React, { useState } from 'react';
-import { ArrowUpDown, Banknote } from 'lucide-react';
+import { ArrowUpDown, Banknote, RefreshCw } from 'lucide-react';
 import { safeStorage } from '../../../services/storage';
 
 // Tỷ giá mặc định: 1 RUB ≈ 320 VND (cập nhật 10/2026, chỉnh được)
@@ -24,6 +24,28 @@ export const CurrencyConverter: React.FC = () => {
   });
   const [editingRate, setEditingRate] = useState(false);
   const [rateInput, setRateInput] = useState(String(rate));
+  const [fetchingRate, setFetchingRate] = useState(false);
+  const [rateUpdatedAt, setRateUpdatedAt] = useState<string>('');
+
+  const handleFetchLiveRate = async () => {
+    setFetchingRate(true);
+    try {
+      const res = await fetch('https://open.er-api.com/v6/latest/RUB');
+      const data = await res.json();
+      const vndRate = data?.rates?.VND;
+      if (vndRate && vndRate > 0) {
+        const rounded = Math.round(vndRate);
+        setRate(rounded);
+        setRateInput(String(rounded));
+        try { safeStorage.setItem(RATE_KEY, String(rounded)); } catch {}
+        const now = new Date();
+        setRateUpdatedAt(`Cập nhật: ${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')} ${now.getDate()}/${now.getMonth() + 1}`);
+      }
+    } catch {
+      // Giữ tỷ giá cũ nếu lỗi mạng
+    }
+    setFetchingRate(false);
+  };
 
   const numAmount = parseFloat(amount.replace(/[^0-9.]/g, '')) || 0;
 
@@ -114,7 +136,19 @@ export const CurrencyConverter: React.FC = () => {
             >
               Sửa
             </button>
+            <button
+              onClick={handleFetchLiveRate}
+              disabled={fetchingRate}
+              className="underline cursor-pointer flex items-center gap-1 disabled:opacity-50"
+              title="Lấy tỷ giá trực tuyến"
+            >
+              <RefreshCw className={`w-3 h-3 ${fetchingRate ? 'animate-spin' : ''}`} />
+              {fetchingRate ? 'Đang lấy...' : 'Online'}
+            </button>
           </>
+        )}
+        {rateUpdatedAt && (
+          <p className="text-[11px] v2-text-faint">{rateUpdatedAt} (tỷ giá tham khảo)</p>
         )}
       </div>
     </div>
